@@ -20,22 +20,17 @@ var jump_vel: Vector3 # Jumping velocity
 
 @onready var camera: Camera3D = $Camera3D
 
-<<<<<<< HEAD
+
 
 func _process(delta):
 	if Input.is_action_pressed("ui_down"):
 		print("aaa")
 
-=======
-<<<<<<< HEAD
 
-=======
->>>>>>> parent of 2302b89 (rand)
->>>>>>> parent of 4054921 (help)
 func _ready() -> void:
 	capture_mouse()
-func _process(delta: float) -> void:
-	pass
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		look_dir = event.relative * 0.001
