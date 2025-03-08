@@ -1,6 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://drycuryk4elpk"]
+[gd_scene load_steps=9 format=3 uid="uid://drycuryk4elpk"]
 
 [ext_resource type="Texture2D" uid="uid://dgqc2evuy18yl" path="res://assets/tileable-img_0062-dark.png" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://dng2w5711i4mu" path="res://player.gd" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://dnb04daoumwie" path="res://enemy.gd" id="3_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://c5tap4qx0ijyu" path="res://icon.svg" id="4_lquwl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0wfyh"]
 albedo_texture = ExtResource("1_o5qli")
@@ -8,17 +11,47 @@ uv1_triplanar = true
 uv2_triplanar = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sugp2"]
-size = Vector3(13.5762, 1, 15.368)
+size = Vector3(83.2486, 1, 85.0421)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_h2yge"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7mycd"]
 
 [node name="Main" type="Node3D"]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.27222)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.29628, -0.317346, 5.91288)
-size = Vector3(22.7969, 1, 20.3854)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.69236, -0.317346, 14.6131)
+size = Vector3(85.0413, 1, 79.3863)
 material = SubResource("StandardMaterial3D_0wfyh")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.265717, 0, 7.18402)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.56349, 0, 13.5259)
 shape = SubResource("BoxShape3D_sugp2")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.93, 0)
+script = ExtResource("2_0xm2m")
+camera_sens = 1.5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+shape = SubResource("SphereShape3D_h2yge")
+
+[node name="Camera" type="Camera3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.836797, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.0117632, 0.999931, 0, -0.999931, -0.0117632, 0, 0, 0)
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.07821, 0)
+script = ExtResource("3_1bvp3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_7mycd")
+
+[node name="Sprite3D" type="Sprite3D" parent="Area3D"]
+billboard = 2
+texture = ExtResource("4_lquwl")
