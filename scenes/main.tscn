@@ -1,6 +1,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 [ext_resource type="Script" uid="uid://caj1bs2q5nq0l" path="res://scenes/player.gd" id="1_o5qli"]
@@ -97,11 +98,11 @@ camera_sens = 3.0
 >>>>>>> parent of 675ea47 (Player jest oddzielną klasą)
 =======
 [gd_scene load_steps=6 format=3 uid="uid://0ghe2c4biqg0"]
+=======
+[gd_scene load_steps=5 format=3 uid="uid://0ghe2c4biqg0"]
+>>>>>>> parent of 2302b89 (rand)
 
 [ext_resource type="Script" uid="uid://caj1bs2q5nq0l" path="res://scenes/player.gd" id="1_o5qli"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o5qli"]
-albedo_color = Color(0.05876, 0.39, 0.0351, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sgp6g"]
 size = Vector3(26.0256, 1, 19.9987)
@@ -119,7 +120,6 @@ albedo_color = Color(1, 0, 1, 1)
 [node name="CSGBox3D" type="CSGBox3D" parent="floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.77014, 0, 0.907227)
 size = Vector3(21.3772, 1, 15.707)
-material = SubResource("StandardMaterial3D_o5qli")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="floor"]
 <<<<<<< HEAD
@@ -140,12 +140,11 @@ script = ExtResource("1_o5qli")
 shape = SubResource("BoxShape3D_o5qli")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0230711, 0.0154344, -0.00688434)
-size = Vector3(1, 1.12799, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00520611, -0.273896, 0)
 material = SubResource("StandardMaterial3D_0wfyh")
 
 [node name="Camera3D" type="Camera3D" parent="player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0777345, -0.112116)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0777345, 2.87618)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.948512, 0.316742, 0, -0.316742, 0.948512, 0, 4.53876, -0.975449)
