@@ -1,11 +1,11 @@
 <<<<<<< HEAD
-[gd_scene load_steps=9 format=3 uid="uid://0ghe2c4biqg0"]
+
 
 [ext_resource type="Script" uid="uid://caj1bs2q5nq0l" path="res://scenes/player.gd" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://dnb04daoumwie" path="res://scenes/enemy.gd" id="2_sugp2"]
 [ext_resource type="Texture2D" uid="uid://c5tap4qx0ijyu" path="res://icon.svg" id="3_jyhfs"]
 =======
-[gd_scene load_steps=8 format=3 uid="uid://0ghe2c4biqg0"]
+
 
 [ext_resource type="Script" uid="uid://cyhvkmmb1oy1y" path="res://scripts/main.gd" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://bfidwqkr5lgj3" path="res://scenes/player.tscn" id="1_o5qli"]
@@ -64,9 +64,6 @@ material = SubResource("StandardMaterial3D_0wfyh")
 [node name="Camera3D" type="Camera3D" parent="player"]
 transform = Transform3D(1, 0, 0, 0, 0.996677, -0.0814514, 0, 0.0814514, 0.996677, -0.0512218, 0.627215, -0.351282)
 =======
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_sugp2")
->>>>>>> 675ea477010cdba86470a98f049e9be2da112b55
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.948512, 0.316742, 0, -0.316742, 0.948512, 0, 4.53876, -0.975449)
