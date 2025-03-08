@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://b0bn1arlly08a"]
+
+[ext_resource type="Script" uid="uid://dng2w5711i4mu" path="res://player.gd" id="1_cqmt1"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_g7ett"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ssrue"]
+albedo_color = Color(1, 0.368627, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jnjyq"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gnkmh"]
+albedo_color = Color(0, 0, 0, 1)
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_cqmt1")
+camera_sens = 1.5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_g7ett")
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.18285, -0.0705673)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.353749, 0.603962)
+height = 1.49854
+material = SubResource("StandardMaterial3D_ssrue")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21985, -0.0223327, 0.118952)
+radius = 0.2
+material = SubResource("StandardMaterial3D_jnjyq")
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.249822, -0.0223327, 0.118952)
+radius = 0.2
+material = SubResource("StandardMaterial3D_gnkmh")
+
+[node name="Player" type="Node3D" parent="."]
