@@ -1,6 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://0ghe2c4biqg0"]
+[gd_scene load_steps=9 format=3 uid="uid://0ghe2c4biqg0"]
 
 [ext_resource type="Script" uid="uid://caj1bs2q5nq0l" path="res://scenes/player.gd" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://dnb04daoumwie" path="res://scenes/enemy.gd" id="2_sugp2"]
+[ext_resource type="Texture2D" uid="uid://c5tap4qx0ijyu" path="res://icon.svg" id="3_jyhfs"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o5qli"]
 albedo_color = Color(0.05876, 0.39, 0.0351, 1)
@@ -9,17 +11,20 @@ albedo_color = Color(0.05876, 0.39, 0.0351, 1)
 size = Vector3(26.0256, 1, 19.9987)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_o5qli"]
+size = Vector3(1, 1.271, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0wfyh"]
 albedo_color = Color(1, 0, 1, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_tbgi4"]
 
 [node name="Main" type="Node3D"]
 
 [node name="floor" type="StaticBody3D" parent="."]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="floor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.77014, 0, 0.907227)
-size = Vector3(21.3772, 1, 15.707)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.77014, -0.272217, 0.907227)
+size = Vector3(21.3772, 0.455566, 15.707)
 material = SubResource("StandardMaterial3D_o5qli")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="floor"]
@@ -31,6 +36,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.28394, 0)
 script = ExtResource("1_o5qli")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.135498, 0)
 shape = SubResource("BoxShape3D_o5qli")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="player"]
@@ -39,9 +45,19 @@ size = Vector3(1, 1.12799, 1)
 material = SubResource("StandardMaterial3D_0wfyh")
 
 [node name="Camera3D" type="Camera3D" parent="player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0777345, -0.112116)
+transform = Transform3D(1, 0, 0, 0, 0.996677, -0.0814514, 0, 0.0814514, 0.996677, -0.0512218, 0.627215, -0.351282)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.948512, 0.316742, 0, -0.316742, 0.948512, 0, 4.53876, -0.975449)
 light_energy = 10.455
 shadow_enabled = true
+
+[node name="enemy" type="Area3D" parent="."]
+script = ExtResource("2_sugp2")
+
+[node name="Sprite3D" type="Sprite3D" parent="enemy"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.61586, -6.34728)
+texture = ExtResource("3_jyhfs")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="enemy"]
+shape = SubResource("SphereShape3D_tbgi4")

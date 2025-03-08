@@ -20,12 +20,11 @@ var jump_vel: Vector3 # Jumping velocity
 
 @onready var camera: Camera3D = $Camera3D
 
-func _process(delta):
-	if Input.is_action_pressed("ui_down"):
-		print("aaa")
+
 func _ready() -> void:
 	capture_mouse()
-
+func _process(delta: float) -> void:
+	pass
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		look_dir = event.relative * 0.001
@@ -33,7 +32,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("exit"): get_tree().quit()
 
 func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("jump"): jumping = true
+	if Input.is_key_pressed(KEY_SPACE): jumping = true
 	if mouse_captured: _handle_joypad_camera_rotation(delta)
 	velocity = _walk(delta) + _gravity(delta) + _jump(delta)
 	move_and_slide()
@@ -51,17 +50,19 @@ func _rotate_camera(sens_mod: float = 1.0) -> void:
 	camera.rotation.x = clamp(camera.rotation.x - look_dir.y * camera_sens * sens_mod, -1.5, 1.5)
 
 func _handle_joypad_camera_rotation(delta: float, sens_mod: float = 1.0) -> void:
-	var joypad_dir: Vector2 = Input.get_vector("look_left", "look_right", "look_up", "look_down")
+	return
+	var joypad_dir: Vector2 = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	if joypad_dir.length() > 0:
 		look_dir += joypad_dir * delta
 		_rotate_camera(sens_mod)
 		look_dir = Vector2.ZERO
 
 func _walk(delta: float) -> Vector3:
-	Input.get_vector("move_left", "move_right", "move_forward", "move_backwards")
+	move_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	var _forward: Vector3 = camera.global_transform.basis * Vector3(move_dir.x, 0, move_dir.y)
 	var walk_dir: Vector3 = Vector3(_forward.x, 0, _forward.z).normalized()
 	walk_vel = walk_vel.move_toward(walk_dir * speed * move_dir.length(), acceleration * delta)
+	print(camera.global_transform.basis)
 	return walk_vel
 
 func _gravity(delta: float) -> Vector3:
