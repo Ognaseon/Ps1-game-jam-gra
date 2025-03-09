@@ -11,4 +11,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	$ui/Label.text = "score: " + str(Global.score)
+
+func deleteEnemy():
+	Global.score += 1
+	

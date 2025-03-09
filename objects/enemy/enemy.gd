@@ -14,8 +14,8 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	position.x = dia * sin(angle )
 	position.z = dia * cos(angle)
-	angle += delta * speed
-	sin += 1.0
+	#angle += delta * speed
+	#sin += 1.0
 	position.y = posy + sin(sin/10.0)
 
 #go to x = (distance)sin(angle) and y = (distance)cos(angle)

@@ -1,4 +1,4 @@
-class_name Player extends CharacterBody3D
+extends CharacterBody3D
 
 @export_range(1, 35, 1) var speed: float = 10 # m/s
 @export_range(10, 400, 1) var acceleration: float = 100 # m/s^2
@@ -18,35 +18,26 @@ var walk_vel: Vector3 # Walking velocity
 var grav_vel: Vector3 # Gravity velocity 
 var jump_vel: Vector3 # Jumping velocity
 
-@onready var camera: Camera3D = $Camera3D
+@onready var camera: Camera3D = $Camera
 
 
 
-func _process(delta):
-	if Input.is_action_pressed("ui_down"):
-		print("aaa")
-
-
+var raysep = 6
+var rayamount = Vector2(3,3)
 func _ready() -> void:
 	capture_mouse()
-
+func _process(delta: float) -> void:
+	sundetection()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		look_dir = event.relative * 0.001
 		if mouse_captured: _rotate_camera()
-	if Input.is_action_just_pressed(&"exit"): get_tree().quit()
+	#if Input.is_action_just_pressed(&"exit"): get_tree().quit()
 
 func _physics_process(delta: float) -> void:
 
-
-	if Input.is_action_just_pressed("jump"): jumping = true
-
 	if Input.is_key_pressed(KEY_SPACE): jumping = true
-
-	if Input.is_key_pressed(KEY_SPACE): jumping = true
-
-	if Input.is_action_just_pressed(&"jump"): jumping = true
 
 	if mouse_captured: _handle_joypad_camera_rotation(delta)
 	velocity = _walk(delta) + _gravity(delta) + _jump(delta)
@@ -76,20 +67,11 @@ func _handle_joypad_camera_rotation(delta: float, sens_mod: float = 1.0) -> void
 
 func _walk(delta: float) -> Vector3:
 
-
-	Input.get_vector("move_left", "move_right", "move_forward", "move_backwards")
-
 	move_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-
-
-	move_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-
-	move_dir = Input.get_vector(&"move_left", &"move_right", &"move_forward", &"move_backwards")
-
 	var _forward: Vector3 = camera.global_transform.basis * Vector3(move_dir.x, 0, move_dir.y)
 	var walk_dir: Vector3 = Vector3(_forward.x, 0, _forward.z).normalized()
 	walk_vel = walk_vel.move_toward(walk_dir * speed * move_dir.length(), acceleration * delta)
-	print(camera.global_transform.basis)
+	
 	return walk_vel
 
 func _gravity(delta: float) -> Vector3:
@@ -103,3 +85,28 @@ func _jump(delta: float) -> Vector3:
 		return jump_vel
 	jump_vel = Vector3.ZERO if is_on_floor() or is_on_ceiling_only() else jump_vel.move_toward(Vector3.ZERO, gravity * delta)
 	return jump_vel
+
+func sundetection():
+	# raycasting sam nie wiem co tu sie dzieje xd
+	# ale dziala
+	var count = 0
+	for i in range(3):
+		for j in range(3):
+			const RAY_LENGTH = 500000
+
+			var space_state = get_world_3d().direct_space_state
+			var cam = $Camera
+			var mousepos = get_viewport().get_mouse_position()
+			
+			Global.mousepos = mousepos
+			var origin = cam.project_ray_origin(mousepos + Vector2(i * raysep - raysep*rayamount.x/2,j * raysep -raysep*rayamount.y/2))
+			var end = origin + cam.project_ray_normal(mousepos  + Vector2(i * raysep - raysep*rayamount.x/2,j * raysep -raysep*rayamount.y/2)) * RAY_LENGTH
+			var query = PhysicsRayQueryParameters3D.create(origin, end, 1)
+			query.collide_with_areas = true
+			
+
+			var result = space_state.intersect_ray(query)
+			if result.has("collider"):
+				if (result["collider"].get_class()) == "Area3D":
+					get_parent().deleteEnemy()
+					return
