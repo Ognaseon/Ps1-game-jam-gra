@@ -23,7 +23,7 @@ var jump_vel: Vector3 # Jumping velocity
 
 
 var raysep = 6
-var rayamount = Vector2(1,1)
+var rayamount = Vector2(3,3)
 func _ready() -> void:
 	capture_mouse()
 func _process(delta: float) -> void:
@@ -87,14 +87,15 @@ func _jump(delta: float) -> Vector3:
 	return jump_vel
 
 func sundetection():
+
 	# i * raysep - raysep*rayamount.x/2.0
-	# -i*raysep/2 + i*raysep
+	# -(rayamount.x-1)*raysep/2 + i*raysep
 	
 	# raycasting sam nie wiem co tu sie dzieje xd
 	# ale dziala
 	var count = 0
-	for i in range(3):
-		for j in range(3):
+	for i in range(rayamount.x):
+		for j in range(rayamount.y):
 			const RAY_LENGTH = 500000
 
 			var space_state = get_world_3d().direct_space_state
@@ -102,8 +103,9 @@ func sundetection():
 			var mousepos = get_viewport().get_mouse_position()
 			
 			Global.mousepos = mousepos
-			var origin = cam.project_ray_origin(mousepos + Vector2(-i*raysep/2 + i*raysep,-j*raysep/2 + j*raysep))
-			var end = origin + cam.project_ray_normal(mousepos  + Vector2(-i*raysep/2 + i*raysep,-j*raysep/2 + j*raysep)) * RAY_LENGTH
+			var origin = cam.project_ray_origin(mousepos + Vector2(-(rayamount.x-1)*raysep/2 + i*raysep,-(rayamount.y-1)*raysep/2 + j*raysep))
+
+			var end = origin + cam.project_ray_normal(mousepos  + Vector2(-(rayamount.x-1)*raysep/2 + i*raysep,-(rayamount.y-1)*raysep/2 + j*raysep)) * RAY_LENGTH
 			var query = PhysicsRayQueryParameters3D.create(origin, end, 1)
 			query.collide_with_areas = true
 			
@@ -111,5 +113,6 @@ func sundetection():
 			var result = space_state.intersect_ray(query)
 			if result.has("collider"):
 				if (result["collider"].get_class()) == "Area3D":
-					get_parent().deleteEnemy(result["collider"])
-					return
+					if Input.is_action_just_pressed("shoot"):
+						get_parent().deleteEnemy(result["collider"])
+						return
