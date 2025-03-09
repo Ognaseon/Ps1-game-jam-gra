@@ -72,7 +72,7 @@ _data = {
 [node name="Main" type="Node3D"]
 script = ExtResource("1_tefeu")
 
-[node name="ground" type="StaticBody3D" parent="." groups=["ground"]]
+[node name="ground" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.27222)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="ground"]
@@ -159,6 +159,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="Panel" type="Panel" parent="ui/Control"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

@@ -24,16 +24,17 @@ var jump_vel: Vector3 # Jumping velocity
 
 var raysep = 6
 var rayamount = Vector2(3,3)
+
 func _ready() -> void:
 	capture_mouse()
+	
 func _process(delta: float) -> void:
 	sundetection()
 
-func _unhandled_input(event: InputEvent) -> void:
+
+func _unhandled_input(event):
 	if event is InputEventMouseMotion:
-		look_dir = event.relative * 0.001
-		if mouse_captured: _rotate_camera()
-	#if Input.is_action_just_pressed(&"exit"): get_tree().quit()
+		print
 
 func _physics_process(delta: float) -> void:
 
@@ -41,24 +42,25 @@ func _physics_process(delta: float) -> void:
 
 	if mouse_captured: _handle_joypad_camera_rotation(delta)
 	velocity = _walk(delta) + _gravity(delta) + _jump(delta)
+	
+	_rotate_camera()
 	move_and_slide()
 
 func capture_mouse() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 	mouse_captured = true
 
 func release_mouse() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	mouse_captured = false
 
-func _rotate_camera(sens_mod: float = 1.0) -> void:
-	camera.rotation.y -= look_dir.x * camera_sens * sens_mod
-	camera.rotation.x = clamp(camera.rotation.x - look_dir.y * camera_sens * sens_mod, -1.5, 1.5)
+func _rotate_camera(sens_mod: float = 0.03) -> void:
+	camera.rotation.y -= Input.get_axis("rotate_left", "rotate_right") * camera_sens * sens_mod
+	#camera.rotation.x = clamp(camera.rotation.x - look_dir.y * camera_sens * sens_mod, -1.5, 1.5)
 
 func _handle_joypad_camera_rotation(delta: float, sens_mod: float = 1.0) -> void:
 	return
 	var joypad_dir: Vector2 = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-
 
 	if joypad_dir.length() > 0:
 		look_dir += joypad_dir * delta
@@ -109,7 +111,6 @@ func sundetection():
 			var query = PhysicsRayQueryParameters3D.create(origin, end, 1)
 			query.collide_with_areas = true
 			
-
 			var result = space_state.intersect_ray(query)
 			if result.has("collider"):
 				if (result["collider"].get_class()) == "Area3D":
