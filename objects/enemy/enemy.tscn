@@ -65,6 +65,7 @@ shape = SubResource("SphereShape3D_1rjq7")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 billboard = 2
+render_priority = 1
 texture = ExtResource("2_vc3w8")
 
 [node name="bullets" type="Node3D" parent="."]

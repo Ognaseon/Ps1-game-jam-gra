@@ -88,25 +88,30 @@ shape = SubResource("BoxShape3D_sugp2")
 
 [node name="Sprite3D2" type="Sprite3D" parent="skybox"]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 31.407, -32.0736)
+transparent = false
 texture = ExtResource("6_choun")
 
 [node name="Sprite3D3" type="Sprite3D" parent="skybox"]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 31.407, 43.8728)
+transparent = false
 texture = ExtResource("6_choun")
 
 [node name="Sprite3D4" type="Sprite3D" parent="skybox"]
 transform = Transform3D(-1.38565e-07, 0, -5, 0, 5, 0, 3.17, 0, -2.18557e-07, 37.9728, 31.407, 5.72062)
 sorting_offset = -6.02
+transparent = false
 texture = ExtResource("6_choun")
 
 [node name="Sprite3D5" type="Sprite3D" parent="skybox"]
 transform = Transform3D(-1.29386e-07, 0, -3.99, 0, 3.99, 0, 2.96, 0, -1.74408e-07, -37.9728, 31.407, 6.07851)
 sorting_offset = 9.38
+transparent = false
 texture = ExtResource("6_choun")
 
 [node name="Sprite3D6" type="Sprite3D" parent="skybox"]
 transform = Transform3D(5, 0, 0, 0, -2.18557e-07, 5, 0, -5, -2.18557e-07, -9.01141, 50.8076, -4.08443)
 sorting_offset = -25.21
+transparent = false
 texture = ExtResource("6_choun")
 
 [node name="sun" type="DirectionalLight3D" parent="."]

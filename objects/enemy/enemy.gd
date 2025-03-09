@@ -29,6 +29,8 @@ func _physics_process(delta: float) -> void:
 		$GPUParticles3D.emitting = true
 		if fallin == true:
 			position.y -= 0.2
+	if dia > 0:
+		dia -= delta
 
 
 func bullet_spawning():

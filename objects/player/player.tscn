@@ -1,8 +1,29 @@
-[gd_scene load_steps=6 format=3 uid="uid://b0bn1arlly08a"]
+[gd_scene load_steps=9 format=3 uid="uid://b0bn1arlly08a"]
 
 [ext_resource type="Script" uid="uid://dng2w5711i4mu" path="res://objects/player/player.gd" id="1_cqmt1"]
+[ext_resource type="Shader" uid="uid://bw2r3l7vpeves" path="res://presets/player.gdshader" id="2_g7ett"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_g7ett"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ssrue"]
+render_priority = -1
+shader = ExtResource("2_g7ett")
+shader_parameter/enable_fog = true
+shader_parameter/fog_color = Color(0.30034, 0.772644, 1, 1)
+shader_parameter/noise_color = Color(0.366256, 0.311785, 0.754309, 1)
+shader_parameter/fog_distance = 100.0
+shader_parameter/fog_fade_range = 50.0
+shader_parameter/enable_noise = true
+shader_parameter/noise_time_fac = 10.0
+shader_parameter/enable_color_limitation = true
+shader_parameter/color_levels = 16
+shader_parameter/enable_dithering = true
+shader_parameter/dither_strength = 0.3
+
+[sub_resource type="QuadMesh" id="QuadMesh_jnjyq"]
+material = SubResource("ShaderMaterial_ssrue")
+flip_faces = true
+size = Vector2(2, 2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ssrue"]
 albedo_color = Color(1, 0.368627, 1, 1)
@@ -21,6 +42,11 @@ shape = SubResource("SphereShape3D_g7ett")
 
 [node name="Camera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.18285, -0.0705673)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.118113, -1.60939)
+mesh = SubResource("QuadMesh_jnjyq")
+skeleton = NodePath("../..")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="Camera"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.353749, 0.603962)
