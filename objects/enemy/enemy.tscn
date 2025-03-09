@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dcqtmafugn0bp"]
+[gd_scene load_steps=13 format=3 uid="uid://dcqtmafugn0bp"]
 
 [ext_resource type="Script" uid="uid://dnb04daoumwie" path="res://objects/enemy/enemy.gd" id="1_1rjq7"]
 [ext_resource type="Texture2D" uid="uid://c5tap4qx0ijyu" path="res://icon.svg" id="2_vc3w8"]
@@ -57,6 +57,16 @@ billboard_mode = 1
 [sub_resource type="QuadMesh" id="QuadMesh_gnbxk"]
 material = SubResource("StandardMaterial3D_c38me")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vc3w8"]
+shading_mode = 0
+albedo_color = Color(0.16, 0.16, 0.16, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_esv4w"]
+material = SubResource("StandardMaterial3D_vc3w8")
+top_radius = 0.7
+height = 0.001
+radial_segments = 8
+
 [node name="Enemy" type="Area3D"]
 script = ExtResource("1_1rjq7")
 
@@ -85,6 +95,7 @@ emitting = false
 amount = 10
 one_shot = true
 explosiveness = 1.0
+collision_base_size = 1.0
 process_material = SubResource("ParticleProcessMaterial_esv4w")
 draw_pass_1 = SubResource("QuadMesh_gnbxk")
 
@@ -101,6 +112,11 @@ billboard = 1
 render_priority = 1
 text = "state"
 font_size = 76
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.619119, 0)
+top_level = true
+mesh = SubResource("CylinderMesh_esv4w")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="BulletSpawnTime" to="." method="_on_bullet_spawn_time_timeout"]

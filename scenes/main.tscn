@@ -124,6 +124,10 @@ transform = Transform3D(1, 0, 0, 0, -0.0117632, 0.999931, 0, -0.999931, -0.01176
 [node name="Player" parent="." instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.38075, 0)
 
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.793686, -0.512939, 7.65154)
+size = Vector3(93.4911, 0.974121, 81.3637)
+
 [node name="ui" type="CanvasLayer" parent="."]
 
 [node name="Label" type="Label" parent="ui"]

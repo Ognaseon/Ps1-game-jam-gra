@@ -1,11 +1,11 @@
 extends Node3D
 var enemy = load("res://objects/enemy/enemy.tscn")
-
+var types = ["normal","flying"]
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	for i in range(50):
+	for i in range(100):
 		var inst = enemy.instantiate()
-		inst.position.y = randf_range(1,12)
+		inst.type = types[randi_range(0,1)]
 		$enemies.add_child(inst)
 
 

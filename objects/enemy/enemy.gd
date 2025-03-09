@@ -14,8 +14,11 @@ var fallin = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if type == "normal":
+		posy = 0.9
+	if type == "flying":
+		posy = randf_range(2,8)
 	
-	posy = position.y
 	$BulletSpawnTime.wait_time = randf() * bullet_spawn_rate
 	$BulletSpawnTime.start()
 	$Label3D.text = "type: " + type
@@ -25,8 +28,16 @@ func _physics_process(delta: float) -> void:
 	if dead == false:
 		position.x = dia * sin(angle )
 		position.z = dia * cos(angle)
-		#angle += delta * speed
-		#sin += 1.0
+		
+		if type == "normal":
+			angle += delta * speed
+		if type == "flying":
+			angle += delta * speed
+			sin += 1.0
+
+
+
+
 		position.y = posy + sin(sin/10.0)
 	if dead == true:
 		$GPUParticles3D.emitting = true
@@ -34,6 +45,14 @@ func _physics_process(delta: float) -> void:
 			position.y -= 0.2
 	#if dia > 0:
 	#	dia -= delta
+	$MeshInstance3D.position = position
+	$MeshInstance3D.position.y = 0.2
+	
+	if position.y < 0.8:
+		if dead == true:
+			fallin = false
+			$GPUParticles3D.emitting = true
+			$AnimationPlayer.play("die")
 
 
 func bullet_spawning():
@@ -50,9 +69,11 @@ func _on_bullet_spawn_time_timeout() -> void:
 
 func _on_body_entered(body: Node3D) -> void:
 	if body.is_in_group("ground"):
-		fallin = false
-		$GPUParticles3D.emitting = true
-		$AnimationPlayer.play("die")
+		if dead == true:
+			
+			fallin = false
+			$GPUParticles3D.emitting = true
+			$AnimationPlayer.play("die")
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	queue_free()
