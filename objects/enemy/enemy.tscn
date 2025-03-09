@@ -3,13 +3,14 @@
 [ext_resource type="Script" uid="uid://dnb04daoumwie" path="res://objects/enemy/enemy.gd" id="1_1rjq7"]
 [ext_resource type="Texture2D" uid="uid://c5tap4qx0ijyu" path="res://icon.svg" id="2_vc3w8"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_1rjq7"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_1rjq7"]
 
 [node name="Area3D" type="Area3D"]
 script = ExtResource("1_1rjq7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_1rjq7")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.179399, 0)
+shape = SubResource("SphereShape3D_1rjq7")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 billboard = 2
