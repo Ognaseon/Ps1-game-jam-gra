@@ -121,7 +121,7 @@ transform = Transform3D(1, 0, 0, 0, -0.0117632, 0.999931, 0, -0.999931, -0.01176
 
 [node name="enemies" type="Node3D" parent="."]
 
-[node name="Player" parent="." instance=ExtResource("4_jyhfs")]
+[node name="Player" parent="." groups=["player"] instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.38075, 0)
 
 [node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="."]
@@ -146,7 +146,7 @@ offset_right = 292.0
 offset_bottom = 20.0
 theme_override_styles/background = SubResource("StyleBoxFlat_jyhfs")
 theme_override_styles/fill = SubResource("StyleBoxFlat_tbgi4")
-value = 14.07
+max_value = 10.0
 show_percentage = false
 
 [node name="cursor" type="Control" parent="ui"]
@@ -205,3 +205,40 @@ texture = ExtResource("5_tbgi4")
 libraries = {
 &"": SubResource("AnimationLibrary_tefeu")
 }
+
+[node name="deathscreen" type="Control" parent="ui"]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="deathlabel" type="Label" parent="ui/deathscreen"]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -152.5
+offset_top = -22.5
+offset_right = 152.5
+offset_bottom = 22.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 2)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 32
+text = "YOU DIED. just s a d"

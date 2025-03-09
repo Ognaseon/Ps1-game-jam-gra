@@ -16,6 +16,8 @@ var fallin = true
 func _ready() -> void:
 	if type == "normal":
 		posy = 0.9
+	if type == "creep":
+		posy = 0.9
 	if type == "flying":
 		posy = randf_range(2,8)
 	
@@ -25,6 +27,8 @@ func _ready() -> void:
 	$Label3D2.text = "state: " + str(state)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+	if Global.health <1:
+		return
 	if dead == false:
 		position.x = dia * sin(angle )
 		position.z = dia * cos(angle)
@@ -34,6 +38,11 @@ func _physics_process(delta: float) -> void:
 		if type == "flying":
 			angle += delta * speed
 			sin += 1.0
+			$Sprite3D.modulate = Color(0.4,0.4,0,1)
+		if type == "creep":
+			#angle += delta * speed
+			dia -= delta/3
+			$Sprite3D.modulate = Color(0.4,0,0,1)
 
 
 
@@ -74,6 +83,10 @@ func _on_body_entered(body: Node3D) -> void:
 			fallin = false
 			$GPUParticles3D.emitting = true
 			$AnimationPlayer.play("die")
+	if body.is_in_group("player"):
+		Global.health -= 1
+		$GPUParticles3D.emitting = true
+		$AnimationPlayer.play("die")
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	queue_free()
