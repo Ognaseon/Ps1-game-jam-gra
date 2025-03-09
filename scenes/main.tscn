@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://drycuryk4elpk"]
+[gd_scene load_steps=15 format=3 uid="uid://drycuryk4elpk"]
 
 [ext_resource type="Texture2D" uid="uid://dgqc2evuy18yl" path="res://assets/tileable-img_0062-dark.png" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://csaqja2dma85s" path="res://scenes/main.gd" id="1_tefeu"]
 [ext_resource type="PackedScene" uid="uid://b0bn1arlly08a" path="res://objects/player/player.tscn" id="4_jyhfs"]
 [ext_resource type="Texture2D" uid="uid://bwg3jxq7keg6e" path="res://assets/images-6.jpeg" id="5_tbgi4"]
+[ext_resource type="Texture2D" uid="uid://b6io6t3oq8anm" path="res://assets/stupid cursor.png" id="5_tefeu"]
 [ext_resource type="Texture2D" uid="uid://0k5qb1tfsnk4" path="res://assets/sky.png" id="6_choun"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0wfyh"]
@@ -72,7 +73,7 @@ _data = {
 [node name="Main" type="Node3D"]
 script = ExtResource("1_tefeu")
 
-[node name="ground" type="StaticBody3D" parent="."]
+[node name="ground" type="StaticBody3D" parent="." groups=["ground"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.27222)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="ground"]
@@ -85,6 +86,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.56349, 0, 13.5259)
 shape = SubResource("BoxShape3D_sugp2")
 
 [node name="skybox" type="Node3D" parent="."]
+visible = false
 
 [node name="Sprite3D2" type="Sprite3D" parent="skybox"]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 31.407, -32.0736)
@@ -143,22 +145,19 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_tbgi4")
 value = 14.07
 show_percentage = false
 
-[node name="Control" type="Control" parent="ui"]
+[node name="cursor" type="Control" parent="ui"]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Panel" type="Panel" parent="ui/Control"]
+[node name="Panel" type="Panel" parent="ui/cursor"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -173,6 +172,20 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_tefeu")
+
+[node name="TextureRect" type="TextureRect" parent="ui/cursor"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_tefeu")
+expand_mode = 1
 
 [node name="ColorRect" type="TextureRect" parent="ui"]
 visible = false

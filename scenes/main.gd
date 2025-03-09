@@ -12,7 +12,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	$ui/Label.text = "score: " + str(Global.score)
-	
+	$ui/cursor.position = Global.mousepos - Vector2(12.5,12.5)
 
 func deleteEnemy(enemyid):	
 	if enemyid.dead == false:
