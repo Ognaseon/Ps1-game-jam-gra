@@ -22,15 +22,15 @@ func _physics_process(delta: float) -> void:
 	if dead == false:
 		position.x = dia * sin(angle )
 		position.z = dia * cos(angle)
-		angle += delta * speed
-		sin += 1.0
+		#angle += delta * speed
+		#sin += 1.0
 		position.y = posy + sin(sin/10.0)
 	if dead == true:
 		$GPUParticles3D.emitting = true
 		if fallin == true:
 			position.y -= 0.2
-	if dia > 0:
-		dia -= delta
+	#if dia > 0:
+	#	dia -= delta
 
 
 func bullet_spawning():

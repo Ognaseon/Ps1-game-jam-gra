@@ -117,3 +117,8 @@ func sundetection():
 					if Input.is_action_just_pressed("shoot"):
 						get_parent().deleteEnemy(result["collider"])
 						return
+
+#func _unhandled_input(event: InputEvent) -> void:
+	#if event is InputEventMouseMotion:
+	#	look_dir = event.relative * 0.001
+		#if mouse_captured: _rotate_camera()
