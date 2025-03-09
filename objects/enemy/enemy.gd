@@ -1,7 +1,7 @@
 extends Area3D
 var angle = randf_range(0,360)
 var dia = randf_range(15,20)
-var speed = randf_range(0.1,0.5)
+var speed = 0
 var posy = 0
 var sin = 0
 
@@ -20,17 +20,17 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	if dead == false:
-		position.x = dia * sin(angle )
+		position.x = dia * sin(angle)
 		position.z = dia * cos(angle)
-		angle += delta * speed
-		sin += 1.0
+		#angle += delta * speed
+		#sin += 1.0
 		position.y = posy + sin(sin/10.0)
 	if dead == true:
 		$GPUParticles3D.emitting = true
 		if fallin == true:
 			position.y -= 0.2
-	if dia > 0:
-		dia -= delta
+	#if dia > 0:
+		#dia -= delta
 
 
 func bullet_spawning():

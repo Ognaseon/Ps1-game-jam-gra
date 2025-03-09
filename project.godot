@@ -27,6 +27,7 @@ window/size/mode=3
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 mouse_cursor/custom_image="uid://b6io6t3oq8anm"
+mouse_cursor/custom_image_hotspot=Vector2(25, 25)
 
 [global_group]
 
