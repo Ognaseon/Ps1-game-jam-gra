@@ -34,7 +34,7 @@ corner_radius_bottom_left = 100
 [node name="Main" type="Node3D"]
 script = ExtResource("1_tefeu")
 
-[node name="ground" type="StaticBody3D" parent="." groups=["ground"]]
+[node name="ground" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.27222)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="ground"]
