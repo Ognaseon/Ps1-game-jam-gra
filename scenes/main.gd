@@ -14,8 +14,7 @@ func _process(delta: float) -> void:
 	$ui/Label.text = "score: " + str(Global.score)
 	
 
-func deleteEnemy(enemyid):
-	
+func deleteEnemy(enemyid):	
 	if enemyid.dead == false:
 		Global.score += 1
 	for n in $enemies.get_children():
