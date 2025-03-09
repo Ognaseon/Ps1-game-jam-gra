@@ -1,11 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://dwftlkmd01m8s"]
+[gd_scene load_steps=4 format=3 uid="uid://dwftlkmd01m8s"]
 
 [ext_resource type="Script" uid="uid://bp03o4a5eaifj" path="res://objects/enemy_bullet/bullet.gd" id="1_xvu77"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xvu77"]
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_8diw7"]
-top_radius = 0.02
+material = SubResource("StandardMaterial3D_xvu77")
+top_radius = 0.3
 bottom_radius = 0.02
-height = 0.2
+height = 0.5
 
 [node name="Bullet" type="Node3D"]
 script = ExtResource("1_xvu77")

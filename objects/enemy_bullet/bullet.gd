@@ -1,6 +1,6 @@
 extends Node3D
 
-const SPEED := 40.0
+const SPEED := 70.0
 
 func _process(delta: float) -> void:
 	look_at(get_node('/root/Main/Player').position)

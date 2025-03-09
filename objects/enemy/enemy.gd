@@ -26,12 +26,14 @@ func _physics_process(delta: float) -> void:
 		sin += 1.0
 		position.y = posy + sin(sin/10.0)
 	if dead == true:
+		$GPUParticles3D.emitting = true
 		if fallin == true:
 			position.y -= 0.2
 
 
 func bullet_spawning():
 	var instance = bullet.instantiate()
+	instance.position = position
 	$bullets.add_child(instance)
 	
 #go to x = (distance)sin(angle) and y = (distance)cos(angle)
@@ -43,8 +45,8 @@ func _on_bullet_spawn_time_timeout() -> void:
 func _on_body_entered(body: Node3D) -> void:
 	if body.is_in_group("ground"):
 		fallin = false
+		$GPUParticles3D.emitting = true
 		$AnimationPlayer.play("die")
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	queue_free()
-
