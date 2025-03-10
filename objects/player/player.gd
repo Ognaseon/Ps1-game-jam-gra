@@ -55,6 +55,8 @@ func release_mouse() -> void:
 	mouse_captured = false
 
 func _rotate_camera(sens_mod: float = 0.03) -> void:
+	$SubViewport/Camera2.rotation_degrees = camera.rotation_degrees - Vector3(0,180,0)
+	$SubViewport/Camera2.position = $Camera.global_position + $Camera.transform.basis.z * 3
 	camera.rotation.y -= Input.get_axis("rotate_left", "rotate_right") * camera_sens * sens_mod
 	#camera.rotation.x = clamp(camera.rotation.x - look_dir.y * camera_sens * sens_mod, -1.5, 1.5)
 

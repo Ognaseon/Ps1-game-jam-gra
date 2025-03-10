@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://dlik7japt0s25"]
+
+[ext_resource type="Texture2D" uid="uid://cfohy5knvdjou" path="res://assets/pngegg.png" id="1_lbdaj"]
+[ext_resource type="PackedScene" uid="uid://do1g2rj7js3em" path="res://scenes/HAWKTUAH os/hawktuah os.tscn" id="2_46l77"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_riaom"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Phone" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(557.234, 362.1)
+rotation = 0.335103
+scale = Vector2(0.700081, 0.700081)
+texture = ExtResource("1_lbdaj")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 479.0
+offset_top = 284.0
+offset_right = 533.0
+offset_bottom = 357.0
+rotation = -0.436332
+texture = SubResource("ViewportTexture_riaom")
+expand_mode = 1
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(320, 480)
+
+[node name="HawktuahOs" parent="SubViewport" instance=ExtResource("2_46l77")]
