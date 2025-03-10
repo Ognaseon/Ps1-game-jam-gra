@@ -9,16 +9,16 @@ viewport_path = NodePath("SubViewport")
 [node name="Phone" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(557.234, 362.1)
+position = Vector2(572.458, 393.593)
 rotation = 0.335103
-scale = Vector2(0.700081, 0.700081)
+scale = Vector2(0.823753, 0.823753)
 texture = ExtResource("1_lbdaj")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_left = 479.0
-offset_top = 284.0
-offset_right = 533.0
-offset_bottom = 357.0
+offset_top = 301.0
+offset_right = 545.0
+offset_bottom = 391.0
 rotation = -0.436332
 texture = SubResource("ViewportTexture_riaom")
 expand_mode = 1

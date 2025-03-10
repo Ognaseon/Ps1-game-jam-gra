@@ -16,6 +16,9 @@ func _process(delta: float) -> void:
 	$ui/cursor.position = Global.mousepos - Vector2(12.5,12.5)
 	if Global.health < 1:
 		$ui/deathscreen.show()
+	if Global.hurt == true:
+		Global.hurt = false
+		$ui/hurt/AnimationPlayer.play("hurt")
 
 func deleteEnemy(enemyid):	
 	if enemyid.dead == false:

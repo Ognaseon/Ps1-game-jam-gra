@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://dcqtmafugn0bp"]
+[gd_scene load_steps=14 format=3 uid="uid://dcqtmafugn0bp"]
 
 [ext_resource type="Script" uid="uid://dnb04daoumwie" path="res://objects/enemy/enemy.gd" id="1_1rjq7"]
 [ext_resource type="Texture2D" uid="uid://c5tap4qx0ijyu" path="res://icon.svg" id="2_vc3w8"]
 [ext_resource type="Texture2D" uid="uid://bwg3jxq7keg6e" path="res://assets/images-6.jpeg" id="3_vc3w8"]
+[ext_resource type="Texture2D" uid="uid://c7plwqjnro1gc" path="res://assets/blood.png" id="4_esv4w"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_1rjq7"]
 
@@ -117,6 +118,11 @@ font_size = 76
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.619119, 0)
 top_level = true
 mesh = SubResource("CylinderMesh_esv4w")
+
+[node name="blood" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.597197, 0)
+visible = false
+texture = ExtResource("4_esv4w")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="BulletSpawnTime" to="." method="_on_bullet_spawn_time_timeout"]
