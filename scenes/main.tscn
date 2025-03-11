@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://drycuryk4elpk"]
+[gd_scene load_steps=19 format=3 uid="uid://drycuryk4elpk"]
 
 [ext_resource type="Texture2D" uid="uid://dgqc2evuy18yl" path="res://assets/tileable-img_0062-dark.png" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://csaqja2dma85s" path="res://scenes/main.gd" id="1_tefeu"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bwg3jxq7keg6e" path="res://assets/images-6.jpeg" id="5_tbgi4"]
 [ext_resource type="Texture2D" uid="uid://b6io6t3oq8anm" path="res://assets/stupid cursor.png" id="5_tefeu"]
 [ext_resource type="Texture2D" uid="uid://0k5qb1tfsnk4" path="res://assets/sky.png" id="6_choun"]
+[ext_resource type="Texture2D" uid="uid://70x36536utnb" path="res://assets/blood-png-1.png" id="7_o6xl0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0wfyh"]
 albedo_texture = ExtResource("1_o5qli")
@@ -68,6 +69,42 @@ tracks/0/keys = {
 _data = {
 &"RESET": SubResource("Animation_tbgi4"),
 &"flash": SubResource("Animation_jyhfs")
+}
+
+[sub_resource type="Animation" id="Animation_tipki"]
+resource_name = "hurt"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.27, 0.79, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_85g3d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_choun"]
+_data = {
+&"RESET": SubResource("Animation_85g3d"),
+&"hurt": SubResource("Animation_tipki")
 }
 
 [node name="Main" type="Node3D"]
@@ -242,3 +279,18 @@ theme_override_constants/shadow_offset_y = 5
 theme_override_constants/outline_size = 20
 theme_override_font_sizes/font_size = 32
 text = "YOU DIED. just s a d"
+
+[node name="hurt" type="TextureRect" parent="ui"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_o6xl0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ui/hurt"]
+libraries = {
+&"": SubResource("AnimationLibrary_choun")
+}

@@ -27,8 +27,15 @@ func _ready() -> void:
 	$Label3D2.text = "state: " + str(state)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+	
 	if Global.health <1:
 		return
+	if position.y < 1:
+		if dead == true:
+			$blood.show()
+			fallin = false
+			$GPUParticles3D.emitting = true
+			$AnimationPlayer.play("die")
 	if dead == false:
 		position.x = dia * sin(angle )
 		position.z = dia * cos(angle)
@@ -57,11 +64,7 @@ func _physics_process(delta: float) -> void:
 	$MeshInstance3D.position = position
 	$MeshInstance3D.position.y = 0.2
 	
-	if position.y < 0.8:
-		if dead == true:
-			fallin = false
-			$GPUParticles3D.emitting = true
-			$AnimationPlayer.play("die")
+	
 
 
 func bullet_spawning():
@@ -79,12 +82,13 @@ func _on_bullet_spawn_time_timeout() -> void:
 func _on_body_entered(body: Node3D) -> void:
 	if body.is_in_group("ground"):
 		if dead == true:
-			
+			$blood.show()
 			fallin = false
 			$GPUParticles3D.emitting = true
 			$AnimationPlayer.play("die")
 	if body.is_in_group("player"):
 		Global.health -= 1
+		Global.hurt = true
 		$GPUParticles3D.emitting = true
 		$AnimationPlayer.play("die")
 

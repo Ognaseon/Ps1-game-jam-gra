@@ -1,0 +1,150 @@
+[gd_scene load_steps=4 format=3 uid="uid://do1g2rj7js3em"]
+
+[ext_resource type="Texture2D" uid="uid://clktjxkhirrlc" path="res://assets/Screenshot 2025-03-10 at 13.11.16.png" id="1_xp4mm"]
+
+[sub_resource type="Gradient" id="Gradient_xp4mm"]
+offsets = PackedFloat32Array(0, 0.36163, 1)
+colors = PackedColorArray(0.705887, 0.705887, 0.705887, 1, 0.144, 0.36, 0.1008, 1, 0.3002, 0.79, 0.463467, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_18ahl"]
+gradient = SubResource("Gradient_xp4mm")
+fill_to = Vector2(0, 1)
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 320.0
+offset_bottom = 480.0
+
+[node name="startscreen" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="TextureRect" parent="startscreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_xp4mm")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="startscreen/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -143.5
+offset_top = -202.0
+offset_right = 143.5
+offset_bottom = -65.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 0
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 48
+text = "HAWK TUAH
+os 0.1."
+
+[node name="ColorRect" type="ColorRect" parent="startscreen/ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.078
+anchor_top = 0.379
+anchor_right = 0.909
+anchor_bottom = 0.525
+offset_left = 0.039999
+offset_top = 0.0800018
+offset_right = 0.119995
+offset_bottom = -1.52588e-05
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="startscreen/ColorRect/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -69.5
+offset_top = -33.5
+offset_right = 69.5
+offset_bottom = 33.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 48
+text = "ok"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="startscreen/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -143.5
+offset_top = 21.0
+offset_right = 143.5
+offset_bottom = 158.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 0
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 48
+text = "to START"
+
+[node name="mainscreen" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="TextureRect" parent="mainscreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_xp4mm")
+expand_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="mainscreen"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 64.0
+grow_horizontal = 2
+texture = SubResource("GradientTexture2D_18ahl")
+
+[node name="Label" type="Label" parent="mainscreen/TextureRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -143.0
+offset_top = -31.0
+offset_right = 144.0
+offset_bottom = 103.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 0
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 48
+text = "HAWK TUAH
+"

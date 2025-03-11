@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://b0bn1arlly08a"]
+[gd_scene load_steps=13 format=3 uid="uid://b0bn1arlly08a"]
 
 [ext_resource type="Script" uid="uid://dng2w5711i4mu" path="res://objects/player/player.gd" id="1_cqmt1"]
 [ext_resource type="Shader" uid="uid://bw2r3l7vpeves" path="res://presets/player.gdshader" id="2_g7ett"]
 [ext_resource type="Texture2D" uid="uid://0k5qb1tfsnk4" path="res://assets/sky.png" id="3_ssrue"]
+[ext_resource type="PackedScene" uid="uid://d1uirxt68cgix" path="res://objects/items/mirror/mirror.tscn" id="4_jnjyq"]
+[ext_resource type="PackedScene" uid="uid://dlik7japt0s25" path="res://objects/items/phone/phone.tscn" id="5_gnkmh"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_g7ett"]
 
@@ -35,11 +37,32 @@ albedo_color = Color(0, 0, 0, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gnkmh"]
 albedo_color = Color(0, 0, 0, 1)
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_jnjyq"]
+viewport_path = NodePath("SubViewport")
+
 [node name="CharacterBody3D" type="CharacterBody3D"]
 script = ExtResource("1_cqmt1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_g7ett")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+
+[node name="Camera2" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.18285, 3.87825)
+fov = 120.0
+
+[node name="Sprite3D3" type="Sprite3D" parent="SubViewport/Camera2"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 5, 3.2685e-13, 0.885784, -86.7073)
+transparent = false
+texture = ExtResource("3_ssrue")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Camera2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.118113, -1.60939)
+mesh = SubResource("QuadMesh_jnjyq")
+skeleton = NodePath("../..")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="SubViewport/Camera2"]
 
 [node name="Camera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.18285, -0.0705673)
@@ -70,3 +93,12 @@ transparent = false
 texture = ExtResource("3_ssrue")
 
 [node name="Player" type="Node3D" parent="."]
+
+[node name="Mirror" parent="." instance=ExtResource("4_jnjyq")]
+
+[node name="TextureRect" parent="Mirror/Polygon2D" index="1"]
+texture = SubResource("ViewportTexture_jnjyq")
+
+[node name="Phone" parent="." instance=ExtResource("5_gnkmh")]
+
+[editable path="Mirror"]
