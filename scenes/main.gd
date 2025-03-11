@@ -43,7 +43,7 @@ func _process(delta: float) -> void:
 		Global.wave += 1
 		$ui/wave.text = "WAVE " + str(Global.wave)
 		$ui/wave/AnimationPlayer.play("wave")
-		genenemies(10+10*Global.wave,3+5*Global.wave,7+8*Global.wave)
+		genenemies(10+5*Global.wave,3+3*Global.wave,7+4*Global.wave)
 
 func deleteEnemy(enemyid):
 	if enemyid.dead == false:

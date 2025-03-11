@@ -6,7 +6,7 @@ var posy = 0
 var sin = 0
 var type = "normal"
 var state = 0.0
-@onready var bullet_spawn_rate = 8
+@onready var bullet_spawn_rate = 10
 @onready var bullet = preload('res://objects/enemy_bullet/bullet.tscn')
 
 var dead = false
