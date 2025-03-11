@@ -207,6 +207,7 @@ texture = ExtResource("2_8dd5n")
 expand_mode = 1
 
 [node name="Panel2" type="Panel" parent="mainscreen"]
+layout_mode = 0
 offset_left = 164.0
 offset_top = 87.0
 offset_right = 309.0
@@ -240,6 +241,7 @@ texture = ExtResource("3_jf1w5")
 expand_mode = 1
 
 [node name="Panel3" type="Panel" parent="mainscreen"]
+layout_mode = 0
 offset_left = 10.0
 offset_top = 251.0
 offset_right = 155.0
@@ -273,6 +275,7 @@ texture = ExtResource("4_uoc7x")
 expand_mode = 1
 
 [node name="Panel4" type="Panel" parent="mainscreen"]
+layout_mode = 0
 offset_left = 164.0
 offset_top = 251.0
 offset_right = 309.0

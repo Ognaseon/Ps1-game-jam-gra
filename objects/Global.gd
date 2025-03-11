@@ -3,6 +3,7 @@ extends Node
 var mousepos = Vector2(0,0)
 var score = 0
 var health = 10
+var difficulty = 'easy'
 var hurt = false
 var wave = 1
 var camrot = 0
