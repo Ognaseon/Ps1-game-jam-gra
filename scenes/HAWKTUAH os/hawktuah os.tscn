@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://do1g2rj7js3em"]
+[gd_scene load_steps=13 format=3 uid="uid://do1g2rj7js3em"]
 
 [ext_resource type="Script" uid="uid://b31ktvlm35mf7" path="res://scenes/HAWKTUAH os/hawktuah_os.gd" id="1_jf1w5"]
 [ext_resource type="Texture2D" uid="uid://clktjxkhirrlc" path="res://assets/Screenshot 2025-03-10 at 13.11.16.png" id="1_xp4mm"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://cna03ssjhsbr6" path="res://assets/hawktuahos/Media005.png" id="3_jf1w5"]
 [ext_resource type="Texture2D" uid="uid://btjuojocoejd5" path="res://assets/hawktuahos/Game004.png" id="4_uoc7x"]
 [ext_resource type="Texture2D" uid="uid://cd35x36ricx6k" path="res://assets/hawktuahos/Net003.png" id="5_fnvit"]
+[ext_resource type="Texture2D" uid="uid://bwg3jxq7keg6e" path="res://assets/images-6.jpeg" id="7_fnvit"]
+[ext_resource type="AudioStream" uid="uid://cfs6lso3ts4oe" path="res://assets/music/New-Recording-5.mp3" id="7_uoc7x"]
 
 [sub_resource type="Gradient" id="Gradient_xp4mm"]
 offsets = PackedFloat32Array(0, 0.36163, 1)
@@ -41,6 +43,7 @@ offset_bottom = 480.0
 script = ExtResource("1_jf1w5")
 
 [node name="startscreen" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -57,6 +60,34 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_xp4mm")
 expand_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="startscreen/ColorRect"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 64.0
+grow_horizontal = 2
+texture = SubResource("GradientTexture2D_18ahl")
+
+[node name="Label" type="Label" parent="startscreen/ColorRect/TextureRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -143.0
+offset_top = -31.0
+offset_right = 144.0
+offset_bottom = 103.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 0
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 48
+text = "HAWK TUAH
+"
 
 [node name="Label" type="Label" parent="startscreen/ColorRect"]
 layout_mode = 1
@@ -75,7 +106,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/line_spacing = 0
 theme_override_constants/outline_size = 20
 theme_override_font_sizes/font_size = 48
-text = "HAWK TUAH
+text = "
 os 0.1."
 
 [node name="ColorRect" type="ColorRect" parent="startscreen/ColorRect"]
@@ -173,7 +204,12 @@ theme_override_font_sizes/font_size = 48
 text = "HAWK TUAH
 "
 
-[node name="Panel" type="Panel" parent="mainscreen"]
+[node name="buttons" type="Control" parent="mainscreen"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="mainscreen/buttons"]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 87.0
@@ -181,7 +217,7 @@ offset_right = 155.0
 offset_bottom = 232.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_18ahl")
 
-[node name="Panel" type="Panel" parent="mainscreen/Panel"]
+[node name="Panel" type="Panel" parent="mainscreen/buttons/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -190,7 +226,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_8dd5n")
 
-[node name="TextureRect2" type="TextureRect" parent="mainscreen/Panel"]
+[node name="TextureRect2" type="TextureRect" parent="mainscreen/buttons/Panel"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -206,7 +242,7 @@ grow_vertical = 2
 texture = ExtResource("2_8dd5n")
 expand_mode = 1
 
-[node name="Panel2" type="Panel" parent="mainscreen"]
+[node name="Panel2" type="Panel" parent="mainscreen/buttons"]
 layout_mode = 0
 offset_left = 164.0
 offset_top = 87.0
@@ -214,7 +250,7 @@ offset_right = 309.0
 offset_bottom = 232.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_18ahl")
 
-[node name="Panel" type="Panel" parent="mainscreen/Panel2"]
+[node name="Panel" type="Panel" parent="mainscreen/buttons/Panel2"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -224,7 +260,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_8dd5n")
 
-[node name="TextureRect2" type="TextureRect" parent="mainscreen/Panel2"]
+[node name="TextureRect2" type="TextureRect" parent="mainscreen/buttons/Panel2"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -240,7 +276,7 @@ grow_vertical = 2
 texture = ExtResource("3_jf1w5")
 expand_mode = 1
 
-[node name="Panel3" type="Panel" parent="mainscreen"]
+[node name="Panel3" type="Panel" parent="mainscreen/buttons"]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 251.0
@@ -248,7 +284,7 @@ offset_right = 155.0
 offset_bottom = 396.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_18ahl")
 
-[node name="Panel" type="Panel" parent="mainscreen/Panel3"]
+[node name="Panel" type="Panel" parent="mainscreen/buttons/Panel3"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -258,7 +294,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_8dd5n")
 
-[node name="TextureRect2" type="TextureRect" parent="mainscreen/Panel3"]
+[node name="TextureRect2" type="TextureRect" parent="mainscreen/buttons/Panel3"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -274,7 +310,7 @@ grow_vertical = 2
 texture = ExtResource("4_uoc7x")
 expand_mode = 1
 
-[node name="Panel4" type="Panel" parent="mainscreen"]
+[node name="Panel4" type="Panel" parent="mainscreen/buttons"]
 layout_mode = 0
 offset_left = 164.0
 offset_top = 251.0
@@ -282,7 +318,7 @@ offset_right = 309.0
 offset_bottom = 396.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_18ahl")
 
-[node name="Panel" type="Panel" parent="mainscreen/Panel4"]
+[node name="Panel" type="Panel" parent="mainscreen/buttons/Panel4"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -292,7 +328,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_8dd5n")
 
-[node name="TextureRect2" type="TextureRect" parent="mainscreen/Panel4"]
+[node name="TextureRect2" type="TextureRect" parent="mainscreen/buttons/Panel4"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -307,3 +343,59 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("5_fnvit")
 expand_mode = 1
+
+[node name="internet" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="internet"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 64.0
+grow_horizontal = 2
+texture = SubResource("GradientTexture2D_18ahl")
+
+[node name="Label" type="Label" parent="internet/TextureRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -143.0
+offset_top = -31.0
+offset_right = 144.0
+offset_bottom = 103.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 0
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 48
+text = "HAWK TUAH
+"
+
+[node name="TextureRect2" type="TextureRect" parent="internet"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_fnvit")
+expand_mode = 1
+
+[node name="Control" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Control"]
+stream = ExtResource("7_uoc7x")

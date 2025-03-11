@@ -49,8 +49,8 @@ shape = SubResource("SphereShape3D_g7ett")
 [node name="SubViewport" type="SubViewport" parent="."]
 
 [node name="Camera2" type="Camera3D" parent="SubViewport"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.18285, 3.87825)
-fov = 120.0
+transform = Transform3D(-1, 0, -8.74228e-08, 8.79364e-09, 0.994928, -0.100587, 8.69794e-08, -0.100587, -0.994928, 0, 1.18285, 3.87825)
+fov = 130.0
 
 [node name="Sprite3D3" type="Sprite3D" parent="SubViewport/Camera2"]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 5, 3.2685e-13, 0.885784, -86.7073)

@@ -3,7 +3,7 @@ extends CharacterBody3D
 @export_range(1, 35, 1) var speed: float = 10 # m/s
 @export_range(10, 400, 1) var acceleration: float = 100 # m/s^2
 
-@export_range(0.1, 3.0, 0.1) var jump_height: float = 1 # m
+@export_range(0.1, 3.0, 0.1) var jump_height: float = 2 # m
 @export_range(0.1, 3.0, 0.1, "or_greater") var camera_sens: float = 1
 
 var jumping: bool = false
@@ -55,10 +55,11 @@ func release_mouse() -> void:
 	mouse_captured = false
 
 func _rotate_camera(sens_mod: float = 0.03) -> void:
-	$SubViewport/Camera2.rotation_degrees = camera.rotation_degrees - Vector3(0,180,0)
-	$SubViewport/Camera2.position = $Camera.global_position + $Camera.transform.basis.z * 3
+	$SubViewport/Camera2.rotation_degrees = camera.rotation_degrees - Vector3(-10,180,0)
+	$SubViewport/Camera2.position = $Camera.global_position + $Camera.transform.basis.z * 0.2
+	Global.camrot -= Input.get_axis("rotate_left", "rotate_right") * camera_sens * sens_mod
 	camera.rotation.y = Global.camrot
-	camera.rotation.y -= Input.get_axis("rotate_left", "rotate_right") * camera_sens * sens_mod
+	
 	#camera.rotation.x = clamp(camera.rotation.x - look_dir.y * camera_sens * sens_mod, -1.5, 1.5)
 
 func _handle_joypad_camera_rotation(delta: float, sens_mod: float = 1.0) -> void:
@@ -123,7 +124,7 @@ func sundetection():
 							return
 					if (get_node(result["collider"].get_path()).is_in_group("bullet")):
 						if Input.is_action_just_pressed("shoot"):
-							result["collider"].queue_free()
+							get_parent().deleteBullet(result["collider"])
 							print("eh")
 
 #func _unhandled_input(event: InputEvent) -> void:

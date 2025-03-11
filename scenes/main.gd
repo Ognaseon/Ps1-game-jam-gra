@@ -45,9 +45,16 @@ func _process(delta: float) -> void:
 		$ui/wave/AnimationPlayer.play("wave")
 		genenemies(10+10*Global.wave,3+5*Global.wave,7+8*Global.wave)
 
-func deleteEnemy(enemyid):	
+func deleteEnemy(enemyid):
 	if enemyid.dead == false:
 		Global.score += 1
 	for n in $enemies.get_children():
 		if n == enemyid:
 			n.dead = true
+
+func deleteBullet(bulletid):
+	print("del", str(bulletid))
+	for n in $bullets.get_children():
+		if n == bulletid:
+			n.scale.x = 50
+			n.queue_free()

@@ -201,6 +201,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.38075, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.793686, -0.512939, 7.65154)
 size = Vector3(93.4911, 0.974121, 81.3637)
 
+[node name="bullets" type="Node3D" parent="."]
+
 [node name="ui" type="CanvasLayer" parent="."]
 
 [node name="Label" type="Label" parent="ui"]
@@ -261,6 +263,7 @@ offset_right = 25.0
 offset_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("5_tefeu")
 expand_mode = 1
 
@@ -306,6 +309,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="ColorRect" type="ColorRect" parent="ui/deathscreen"]
 layout_mode = 1
@@ -314,6 +318,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0.65, 0.013, 0.013, 0.796078)
 
 [node name="deathlabel" type="Label" parent="ui/deathscreen"]

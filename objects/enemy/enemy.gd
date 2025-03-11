@@ -6,7 +6,7 @@ var posy = 0
 var sin = 0
 var type = "normal"
 var state = 0.0
-@onready var bullet_spawn_rate = 10
+@onready var bullet_spawn_rate = 8
 @onready var bullet = preload('res://objects/enemy_bullet/bullet.tscn')
 
 var dead = false
@@ -52,7 +52,7 @@ func _physics_process(delta: float) -> void:
 			state += delta
 			if state > 5:
 				if canspawnbullet == true:
-					$BulletSpawnTime.wait_time = randf() * bullet_spawn_rate
+					$BulletSpawnTime.wait_time = bullet_spawn_rate * randfn(0.7,1.3)
 					$BulletSpawnTime.start()
 					canspawnbullet = false
 		if type == "creep":
@@ -80,13 +80,13 @@ func bullet_spawning():
 	canspawnbullet = true
 	var instance = bullet.instantiate()
 	instance.position = position
-	$bullets.add_child(instance)
+	get_parent().get_parent().get_node("bullets").add_child(instance)
 	
 #go to x = (distance)sin(angle) and y = (distance)cos(angle)
 
 func _on_bullet_spawn_time_timeout() -> void:
 	bullet_spawning()
-	$BulletSpawnTime.wait_time = randf() * bullet_spawn_rate
+	$BulletSpawnTime.wait_time =  randf_range(0.7,1.3) * bullet_spawn_rate
 
 func _on_body_entered(body: Node3D) -> void:
 	if body.is_in_group("ground"):
