@@ -57,6 +57,7 @@ func release_mouse() -> void:
 func _rotate_camera(sens_mod: float = 0.03) -> void:
 	$SubViewport/Camera2.rotation_degrees = camera.rotation_degrees - Vector3(0,180,0)
 	$SubViewport/Camera2.position = $Camera.global_position + $Camera.transform.basis.z * 3
+	camera.rotation.y = Global.camrot
 	camera.rotation.y -= Input.get_axis("rotate_left", "rotate_right") * camera_sens * sens_mod
 	#camera.rotation.x = clamp(camera.rotation.x - look_dir.y * camera_sens * sens_mod, -1.5, 1.5)
 
@@ -116,9 +117,14 @@ func sundetection():
 			var result = space_state.intersect_ray(query)
 			if result.has("collider"):
 				if (result["collider"].get_class()) == "Area3D":
-					if Input.is_action_just_pressed("shoot"):
-						get_parent().deleteEnemy(result["collider"])
-						return
+					if (get_node(result["collider"].get_path()).is_in_group("enemy")):
+						if Input.is_action_just_pressed("shoot"):
+							get_parent().deleteEnemy(result["collider"])
+							return
+					if (get_node(result["collider"].get_path()).is_in_group("bullet")):
+						if Input.is_action_just_pressed("shoot"):
+							result["collider"].queue_free()
+							print("eh")
 
 #func _unhandled_input(event: InputEvent) -> void:
 	#if event is InputEventMouseMotion:

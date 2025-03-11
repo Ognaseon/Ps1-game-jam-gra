@@ -68,7 +68,7 @@ top_radius = 0.7
 height = 0.001
 radial_segments = 8
 
-[node name="Enemy" type="Area3D"]
+[node name="Enemy" type="Area3D" groups=["enemy"]]
 script = ExtResource("1_1rjq7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -83,6 +83,8 @@ texture = ExtResource("2_vc3w8")
 top_level = true
 
 [node name="BulletSpawnTime" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
 
 [node name="Enemy" type="Node3D" parent="."]
 
