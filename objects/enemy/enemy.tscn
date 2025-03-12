@@ -45,18 +45,27 @@ _data = {
 }
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_esv4w"]
+angle_min = -720.0
+angle_max = 720.0
 inherit_velocity_ratio = 1.0
+velocity_pivot = Vector3(0, 1, 0)
+direction = Vector3(1, 1, 0)
 spread = 180.0
-initial_velocity_max = 5.0
+initial_velocity_min = 3.77
+initial_velocity_max = 7.64
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c38me"]
+render_priority = 4
 shading_mode = 0
 albedo_color = Color(1, 0, 0, 1)
 albedo_texture = ExtResource("3_vc3w8")
+heightmap_scale = 0.205
 billboard_mode = 1
 
 [sub_resource type="QuadMesh" id="QuadMesh_gnbxk"]
 material = SubResource("StandardMaterial3D_c38me")
+subdivide_width = 1
+subdivide_depth = 1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vc3w8"]
 shading_mode = 0
@@ -94,11 +103,10 @@ libraries = {
 }
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
-emitting = false
 amount = 10
-one_shot = true
+lifetime = 0.7
+speed_scale = 1.37
 explosiveness = 1.0
-collision_base_size = 1.0
 process_material = SubResource("ParticleProcessMaterial_esv4w")
 draw_pass_1 = SubResource("QuadMesh_gnbxk")
 
