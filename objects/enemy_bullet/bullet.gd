@@ -1,6 +1,6 @@
 extends Area3D
 
-const SPEED := 2.0
+const SPEED := 5.0
 
 func _ready() -> void:
 	look_at(Vector3(get_node('/root/Main/Player').position.x,1,get_node('/root/Main/Player').position.z))
