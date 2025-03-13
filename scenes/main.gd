@@ -19,7 +19,7 @@ func genenemies(normalcount, flyingcount, creepcount):
 
 func _ready() -> void:
 	$ui/wave/AnimationPlayer.play("wave")
-	genenemies(10,3,7)
+	genenemies(10,0,0)
 	
 
 
@@ -42,8 +42,29 @@ func _process(delta: float) -> void:
 		Global.health = 10
 		Global.wave += 1
 		$ui/wave.text = "WAVE " + str(Global.wave)
+		if Global.wave == 10:
+			$ui/wave.text = "FINAL WAVE"
 		$ui/wave/AnimationPlayer.play("wave")
-		genenemies(10+5*Global.wave,3+3*Global.wave,7+4*Global.wave)
+		match Global.wave:
+			2:
+				#genenemies(10+5*Global.wave,3+3*Global.wave,7+4*Global.wave)
+				genenemies(20,0,5)
+			3:
+				genenemies(30,0,10)
+			4:
+				genenemies(20,5,15)
+			5:
+				genenemies(30,10,20)
+			6:
+				genenemies(40,15,25)
+			7:
+				genenemies(20,0,10)
+			8:
+				genenemies(20,0,10)
+			9:
+				genenemies(20,0,10)
+			10:
+				genenemies(20,0,10)
 
 func deleteEnemy(enemyid):
 	if enemyid.dead == false:
