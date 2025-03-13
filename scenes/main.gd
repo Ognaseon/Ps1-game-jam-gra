@@ -3,7 +3,7 @@ var enemy = load("res://objects/enemy/enemy.tscn")
 var types = ["normal","flying", "creep"]
 # Called when the node enters the scene tree for the first time.
 
-func genenemies(normalcount, flyingcount, creepcount):
+func genenemies(normalcount, flyingcount, creepcount, dodgecount):
 	for i in range(normalcount):
 		var inst = enemy.instantiate()
 		inst.type = "normal"
@@ -16,10 +16,14 @@ func genenemies(normalcount, flyingcount, creepcount):
 		var inst = enemy.instantiate()
 		inst.type = "creep"
 		$enemies.add_child(inst)
+	for i in range(dodgecount):
+		var inst = enemy.instantiate()
+		inst.type = "dodger"
+		$enemies.add_child(inst)
 
 func _ready() -> void:
 	$ui/wave/AnimationPlayer.play("wave")
-	genenemies(10,0,0)
+	genenemies(10,0,0,0)
 	
 
 
@@ -48,23 +52,23 @@ func _process(delta: float) -> void:
 		match Global.wave:
 			2:
 				#genenemies(10+5*Global.wave,3+3*Global.wave,7+4*Global.wave)
-				genenemies(20,0,5)
+				genenemies(20,0,5,0)
 			3:
-				genenemies(30,0,10)
+				genenemies(30,0,10,0)
 			4:
-				genenemies(20,5,15)
+				genenemies(20,5,15,0)
 			5:
-				genenemies(30,10,20)
+				genenemies(30,10,20,0)
 			6:
-				genenemies(40,15,25)
+				genenemies(40,15,25,0)
 			7:
-				genenemies(20,0,10)
+				genenemies(20,0,10,10)
 			8:
-				genenemies(20,0,10)
+				genenemies(20,0,10,20)
 			9:
-				genenemies(20,0,10)
+				genenemies(20,0,10,30)
 			10:
-				genenemies(20,0,10)
+				genenemies(20,0,10,40)
 
 func deleteEnemy(enemyid):
 	if enemyid.dead == false:
