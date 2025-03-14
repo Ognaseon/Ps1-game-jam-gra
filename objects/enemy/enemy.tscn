@@ -102,20 +102,6 @@ collision_base_size = 1.0
 process_material = SubResource("ParticleProcessMaterial_esv4w")
 draw_pass_1 = SubResource("QuadMesh_gnbxk")
 
-[node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12924, 0)
-billboard = 1
-render_priority = 1
-text = "hello there i lkie cows and oder animalz"
-font_size = 76
-
-[node name="Label3D2" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6943, 0)
-billboard = 1
-render_priority = 1
-text = "state"
-font_size = 76
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.619119, 0)
 top_level = true

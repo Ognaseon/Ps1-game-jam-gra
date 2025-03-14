@@ -194,6 +194,8 @@ transform = Transform3D(1, 0, 0, 0, -0.0117632, 0.999931, 0, -0.999931, -0.01176
 
 [node name="enemies" type="Node3D" parent="."]
 
+[node name="powerup" type="Node3D" parent="."]
+
 [node name="Player" parent="." groups=["player"] instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.38075, 0)
 
@@ -357,3 +359,8 @@ texture = ExtResource("7_o6xl0")
 libraries = {
 &"": SubResource("AnimationLibrary_choun")
 }
+
+[node name="poweruptimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="poweruptimer" to="." method="_on_poweruptimer_timeout"]

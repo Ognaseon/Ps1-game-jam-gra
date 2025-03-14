@@ -33,6 +33,7 @@ ground=""
 player=""
 enemy=""
 bullet=""
+powerup=""
 
 [input]
 

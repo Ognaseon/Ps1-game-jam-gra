@@ -30,6 +30,12 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	sundetection()
+	if Global.activepowerups["megashot"] == true:
+		raysep = 24
+		rayamount = Vector2(5,5)
+	else:
+		raysep = 6
+		rayamount = Vector2(3,3)
 
 
 func _unhandled_input(event):
@@ -117,16 +123,33 @@ func sundetection():
 			
 			var result = space_state.intersect_ray(query)
 			if result.has("collider"):
+				var laser = false
+				if Global.activepowerups["laser"] == true:
+					laser = true
+				
 				if (result["collider"].get_class()) == "Area3D":
 					if (get_node(result["collider"].get_path()).is_in_group("enemy")):
 						get_node(result["collider"].get_path()).oncursor[0] = true
 						if Input.is_action_just_pressed("shoot"):
 							get_parent().deleteEnemy(result["collider"])
 							return
+						if laser == true:
+							get_parent().deleteEnemy(result["collider"])
 					if (get_node(result["collider"].get_path()).is_in_group("bullet")):
 						if Input.is_action_just_pressed("shoot"):
 							get_parent().deleteBullet(result["collider"])
 							print("eh")
+						if laser == true:
+							get_parent().deleteBullet(result["collider"])
+					if (get_node(result["collider"].get_path()).is_in_group("powerup")):
+						if Input.is_action_just_pressed("shoot"):
+							var node = get_node(result["collider"].get_path())
+							if node.ded == false:
+								Global.powerups.append(node.data[node.type])
+							node.ded = true
+							
+							get_node(result["collider"].get_path()).queue_free()
+							
 
 #func _unhandled_input(event: InputEvent) -> void:
 	#if event is InputEventMouseMotion:
