@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://dwftlkmd01m8s"]
+
+[ext_resource type="Script" uid="uid://bp03o4a5eaifj" path="res://objects/enemy_bullet/bullet.gd" id="1_xvu77"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xvu77"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xvu77"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_8diw7"]
+material = SubResource("StandardMaterial3D_xvu77")
+top_radius = 0.3
+bottom_radius = 0.02
+height = 0.5
+
+[node name="Area3D" type="Area3D" groups=["bullet"]]
+script = ExtResource("1_xvu77")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_xvu77")
+
+[node name="Bullet" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Bullet"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_8diw7")
+
+[node name="RayCast3D" type="RayCast3D" parent="Bullet"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+visible = false
+target_position = Vector3(0, -0.2, 0)
+hit_from_inside = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="." to="Bullet" method="_on_area_3d_body_entered"]

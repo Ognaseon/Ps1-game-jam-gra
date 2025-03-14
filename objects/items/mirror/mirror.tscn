@@ -1,0 +1,51 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1uirxt68cgix"]
+
+[ext_resource type="Texture2D" uid="uid://b7rg3hmr5mmdt" path="res://assets/pngtree-elegant-pink-hand-mirror-with-a-handle-png-image_19912506.png" id="1_4he1t"]
+
+[node name="Mirror" type="Node2D"]
+position = Vector2(18.97, 39.38)
+rotation = 0.214676
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(135, 348)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_4he1t")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+clip_children = 1
+polygon = PackedVector2Array(131, 247, 142.49, 248, 153, 251, 164.49, 258, 176.49, 270, 181, 288, 178.49, 300, 173, 311, 152, 326, 125, 328, 102, 317, 90, 297, 92, 273, 105, 255, 118.49, 249)
+
+[node name="Control" type="Control" parent="Polygon2D"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -3.0
+offset_top = 367.0
+offset_right = 275.0
+offset_bottom = 405.0
+rotation = -0.694641
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="Polygon2D"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="Polygon2D"]
+offset_right = 336.0
+offset_bottom = 491.0
+color = Color(0, 0.533333, 1, 0.309804)
+
+[node name="ColorRect2" type="ColorRect" parent="Polygon2D"]
+offset_left = -3.0
+offset_top = 367.0
+offset_right = 392.0
+offset_bottom = 385.0
+rotation = -0.694641
+color = Color(1, 1, 1, 0.313726)
+
+[node name="ColorRect3" type="ColorRect" parent="Polygon2D"]
+offset_left = 13.6429
+offset_top = 386.975
+offset_right = 408.643
+offset_bottom = 398.975
+rotation = -0.694641
+color = Color(1, 1, 1, 0.313726)
