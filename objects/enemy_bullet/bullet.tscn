@@ -30,5 +30,5 @@ visible = false
 target_position = Vector3(0, -0.2, 0)
 hit_from_inside = true
 
-[connection signal="body_entered" from="." to="Bullet" method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="." to="Bullet" method="_on_area_3d_body_entered"]
