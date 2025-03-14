@@ -40,6 +40,8 @@ func _process(delta: float) -> void:
 	else:
 		raysep = 6
 		rayamount = Vector2(3,3)
+	if Input.is_action_just_pressed("shoot"):
+		$shoot.play()
 
 
 func _unhandled_input(event):
@@ -102,7 +104,7 @@ func _handle_joypad_camera_rotation(delta: float, sens_mod: float = 1.0) -> void
 		look_dir = Vector2.ZERO
 
 func _walk(delta: float) -> Vector3:
-
+	return Vector3(0,0,0)
 	move_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	var _forward: Vector3 = camera.global_transform.basis * Vector3(move_dir.x, 0, move_dir.y)
 	var walk_dir: Vector3 = Vector3(_forward.x, 0, _forward.z).normalized()
@@ -115,6 +117,7 @@ func _gravity(delta: float) -> Vector3:
 	return grav_vel
 
 func _jump(delta: float) -> Vector3:
+	return Vector3(0,0,0)
 	if jumping:
 		if is_on_floor(): jump_vel = Vector3(0, sqrt(4 * jump_height * gravity), 0)
 		jumping = false
