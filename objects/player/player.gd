@@ -119,6 +119,7 @@ func sundetection():
 			if result.has("collider"):
 				if (result["collider"].get_class()) == "Area3D":
 					if (get_node(result["collider"].get_path()).is_in_group("enemy")):
+						get_node(result["collider"].get_path()).oncursor[0] = true
 						if Input.is_action_just_pressed("shoot"):
 							get_parent().deleteEnemy(result["collider"])
 							return
