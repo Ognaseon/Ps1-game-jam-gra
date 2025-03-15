@@ -221,8 +221,10 @@ light_color = Color(0.6, 0, 1, 1)
 light_energy = 2.467
 
 [connection signal="pressed" from="CanvasLayer/MainMenu/VBoxContainer/StartGame" to="CanvasLayer/MainMenu" method="_on_start_game_pressed"]
+<<<<<<< HEAD
 =======
 [connection signal="pressed" from="CanvasLayer/MainMenu/VBoxContainer/StartGame" to="CanvasLayer/MainMenu" method="_on_button_pressed"]
+>>>>>>> 0029015c6bc6f0252f49f0522a98fea5de83da77
 [connection signal="pressed" from="CanvasLayer/MainMenu/VBoxContainer/Options" to="CanvasLayer/MainMenu" method="_on_options_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/VBoxContainer/Options" to="CanvasLayer/MainMenu" method="_on_button_3_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/VBoxContainer/Exit" to="CanvasLayer/MainMenu" method="_on_exit_pressed"]
