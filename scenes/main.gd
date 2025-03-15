@@ -2,6 +2,8 @@ extends Node3D
 var enemy = load("res://objects/enemy/enemy.tscn")
 var powerup = load("res://objects/powerup/powerup.tscn")
 var types = ["normal","flying", "creep", "dodger"]
+
+var can_shield = true
 # Called when the node enters the scene tree for the first time.
 func spawnpowerup():
 	var inst = powerup.instantiate()
@@ -41,7 +43,9 @@ func status_effects_look():
 		tween_m.tween_property($ui/cursor/TextureRect, 'size', Vector2(25, 25), 1)
 		tween_m.tween_property($ui/cursor/TextureRect, 'position', Vector2(0, 0), 1)
 		#$ui/cursor/TextureRect.position = Vector2(-12.5, -12.5)
-		
+	if Global.activepowerups["shield"] == true and can_shield:
+		$ui/AnimationPlayer.play("im_god")
+		can_shield = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
