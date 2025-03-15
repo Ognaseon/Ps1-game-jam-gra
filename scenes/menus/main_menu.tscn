@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bv80gawdp7sku"]
+[gd_scene load_steps=21 format=3 uid="uid://bv80gawdp7sku"]
 
 [ext_resource type="PackedScene" uid="uid://bvh7uaxj816qn" path="res://assets/mall_FINAL.glb" id="1_6bivr"]
 [ext_resource type="Script" uid="uid://xxm1b5g7tpoq" path="res://scenes/menus/main_menu.gd" id="1_l6cm7"]
@@ -8,6 +8,21 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2o76q"]
 shading_mode = 0
 albedo_color = Color(0.0986667, 0, 0.16, 1)
+
+[sub_resource type="Animation" id="Animation_2o76q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.124215, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_6bivr"]
 resource_name = "spin"
@@ -24,21 +39,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0.124215, 0, 0), Vector3(0.123918, 6.28319, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_2o76q"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0.124215, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_imvie"]
@@ -75,6 +75,15 @@ corner_radius_bottom_left = 8
 
 [sub_resource type="LabelSettings" id="LabelSettings_vue75"]
 font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_6bivr"]
+font_size = 64
+
+[sub_resource type="Gradient" id="Gradient_imvie"]
+colors = PackedColorArray(0.79, 0.4345, 0, 1, 0.9195, 0.31, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ng0o5"]
+gradient = SubResource("Gradient_imvie")
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2o76q"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -207,6 +216,28 @@ visible = false
 [node name="Panel" parent="CanvasLayer/Settings" index="0"]
 visible = false
 
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+offset_left = 779.0
+offset_top = -28.0
+offset_right = 1594.0
+offset_bottom = 671.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+clip_children = 2
+offset_left = 989.0
+offset_top = 260.0
+offset_right = 1457.0
+offset_bottom = 572.0
+text = "professional"
+label_settings = SubResource("LabelSettings_6bivr")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Label"]
+layout_mode = 0
+offset_right = 505.0
+offset_bottom = 118.0
+texture = SubResource("GradientTexture2D_ng0o5")
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.694935, 0.719073, 0, -0.719073, 0.694935, 0, 6.06508, 0)
 light_color = Color(0.6, 0, 1, 1)
@@ -222,8 +253,8 @@ light_energy = 2.467
 
 [connection signal="pressed" from="CanvasLayer/MainMenu/VBoxContainer/StartGame" to="CanvasLayer/MainMenu" method="_on_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/VBoxContainer/StartGame" to="CanvasLayer/MainMenu" method="_on_start_game_pressed"]
-[connection signal="pressed" from="CanvasLayer/MainMenu/VBoxContainer/Options" to="CanvasLayer/MainMenu" method="_on_button_3_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/VBoxContainer/Options" to="CanvasLayer/MainMenu" method="_on_options_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/VBoxContainer/Options" to="CanvasLayer/MainMenu" method="_on_button_3_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/VBoxContainer/Exit" to="CanvasLayer/MainMenu" method="_on_exit_pressed"]
 
 [editable path="CanvasLayer/Settings"]
