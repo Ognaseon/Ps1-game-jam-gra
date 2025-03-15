@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://y0iuf3qvf4bn"
-path.s3tc="res://.godot/imported/mall_imageedit_2_2953692379.jpg-5b6af5b2ba5a86b740b750df9f411ddf.s3tc.ctex"
+uid="uid://bhyotxckvut00"
+path.s3tc="res://.godot/imported/mall_FINAL_Illustration48.png-f0567abd2508be930c934bfbf56008a0.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "a557b3857c0bca23754fd44705e9c8f3"
+"md5": "c0592cb3a194d652d60fd325d95e9dc0"
 }
 
 [deps]
 
-source_file="res://assets/mall/mall_imageedit_2_2953692379.jpg"
-dest_files=["res://.godot/imported/mall_imageedit_2_2953692379.jpg-5b6af5b2ba5a86b740b750df9f411ddf.s3tc.ctex"]
+source_file="res://assets/mall_FINAL_Illustration48.png"
+dest_files=["res://.godot/imported/mall_FINAL_Illustration48.png-f0567abd2508be930c934bfbf56008a0.s3tc.ctex"]
 
 [params]
 

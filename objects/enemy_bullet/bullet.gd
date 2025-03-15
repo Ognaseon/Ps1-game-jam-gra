@@ -36,12 +36,15 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 
 
 func _on_body_entered(body: Node3D) -> void:
+
 	var candamage = true
 	if body.is_in_group("player"):
+		
 		Global.hurt = true
 		if Global.activepowerups["invincibility"] == true:
 			candamage = false
 		if candamage == true:
+			Global.damaged += 1
 			Global.hurt = true
 			Global.health -= 1
 		if Global.activepowerups["shield"] == true:

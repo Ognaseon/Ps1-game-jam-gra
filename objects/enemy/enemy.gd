@@ -65,8 +65,9 @@ func _physics_process(delta: float) -> void:
 		speed = 0
 		freeze = true
 	else:
-		var freeze_tween = create_tween()
+		
 		if dead == false:
+			var freeze_tween = create_tween()
 			freeze_tween.tween_property($Sprite3D, 'modulate', Color('ffffff'), 1)
 	if Global.activepowerups["shield"] == true:
 		week = true
@@ -175,10 +176,12 @@ func _on_body_entered(body: Node3D) -> void:
 			$GPUParticles3D.emitting = true
 			$AnimationPlayer.play("die")
 	if body.is_in_group("player"):
+		
 		var candamage = true
 		if Global.activepowerups["invincibility"] == true:
 			candamage = false
 		if candamage == true:
+			Global.damaged += 1
 			Global.health -= 1
 		Global.hurt = true
 		$GPUParticles3D.emitting = true

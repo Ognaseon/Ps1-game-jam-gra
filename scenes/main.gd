@@ -46,6 +46,7 @@ func status_effects_look():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	status_effects_look()
+	Global.time += delta
 	$ui/lives.max_value = Global.maxhealth
 	$ui/lives.value = Global.health
 	$ui/Label.text = "score: " + str(Global.score)
