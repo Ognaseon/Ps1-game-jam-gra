@@ -57,12 +57,14 @@ func _physics_process(delta: float) -> void:
 		freeze = true
 	else:
 		var freeze_tween = create_tween()
-		freeze_tween.tween_property($Sprite3D, 'modulate', Color('ffffff'), 1)
+		if dead == false:
+			freeze_tween.tween_property($Sprite3D, 'modulate', Color('ffffff'), 1)
 	if Global.activepowerups["shield"] == true:
 		week = true
 	if Global.activepowerups["scary"] == true:
 		scared = true
-		dia += delta
+		if dia < 25:
+			dia += delta
 #	$Label3D2.text = "state: " + str(state)
 	if Global.health <1:
 		return
