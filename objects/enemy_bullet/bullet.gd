@@ -19,20 +19,36 @@ func _process(delta: float) -> void:
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	var candamage = true
 	if body.is_in_group("player"):
+		Global.hurt = true
 		if Global.activepowerups["invincibility"] == true:
 			candamage = false
 		if candamage == true:
+			Global.hurt = true
 			Global.health -= 1
 		if Global.activepowerups["shield"] == true:
 
 			Global.health += 0.5
+			
 			queue_free()
 			return
+
 		queue_free()
 
 
 func _on_body_entered(body: Node3D) -> void:
+	var candamage = true
 	if body.is_in_group("player"):
-		Global.health -= 1
+		Global.hurt = true
+		if Global.activepowerups["invincibility"] == true:
+			candamage = false
+		if candamage == true:
+			Global.hurt = true
+			Global.health -= 1
+		if Global.activepowerups["shield"] == true:
+
+			Global.health += 0.5
+			
+			queue_free()
+			return
+
 		queue_free()
-	

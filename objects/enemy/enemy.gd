@@ -16,6 +16,8 @@ var dir = 1
 var dia1 = 0
 var slowness = 0
 var ispeed = 0
+var deathsound = randi_range(0,1)
+var onetime = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	ispeed = speed
@@ -88,7 +90,7 @@ func _physics_process(delta: float) -> void:
 			if Global.activepowerups["freeze"] == false:
 				position.y = posy + sin(sin/10.0)
 		if type == "creep":
-			#angle += delta * speed
+			#angle += delta * speednm 
 			dia -= delta/3
 			$Sprite3D.modulate = Color(0.4,0,0,1)
 			position.y = posy
@@ -117,6 +119,13 @@ func _physics_process(delta: float) -> void:
 		$GPUParticles3D.emitting = true
 		if fallin == true:
 			position.y -= 0.2
+		if onetime == 0:
+			if deathsound == 0:
+				$AudioStreamPlayer.play()
+			else:
+				$AudioStreamPlayer2.play()
+			onetime = 1
+
 	#if dia > 0:
 	#	dia -= delta
 	$MeshInstance3D.position = position

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://drycuryk4elpk"]
+[gd_scene load_steps=23 format=3 uid="uid://drycuryk4elpk"]
 
 [ext_resource type="Texture2D" uid="uid://dgqc2evuy18yl" path="res://assets/tileable-img_0062-dark.png" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://csaqja2dma85s" path="res://scenes/main.gd" id="1_tefeu"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b6io6t3oq8anm" path="res://assets/stupid cursor.png" id="5_tefeu"]
 [ext_resource type="Texture2D" uid="uid://0k5qb1tfsnk4" path="res://assets/sky.png" id="6_choun"]
 [ext_resource type="Texture2D" uid="uid://70x36536utnb" path="res://assets/blood-png-1.png" id="7_o6xl0"]
+[ext_resource type="AudioStream" uid="uid://blk2u65j3tjgo" path="res://assets/music/sfx/damage.wav" id="8_tipki"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0wfyh"]
 albedo_texture = ExtResource("1_o5qli")
@@ -362,5 +363,8 @@ libraries = {
 
 [node name="poweruptimer" type="Timer" parent="."]
 autostart = true
+
+[node name="damage" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_tipki")
 
 [connection signal="timeout" from="poweruptimer" to="." method="_on_poweruptimer_timeout"]
