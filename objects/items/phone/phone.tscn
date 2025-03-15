@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dlik7japt0s25"]
 
 [ext_resource type="Texture2D" uid="uid://cfohy5knvdjou" path="res://assets/pngegg.png" id="1_lbdaj"]
-[ext_resource type="Script" path="res://objects/items/phone/phone.gd" id="1_riaom"]
+[ext_resource type="Script" uid="uid://d0kugqcjismuj" path="res://objects/items/phone/phone.gd" id="1_riaom"]
 [ext_resource type="PackedScene" uid="uid://do1g2rj7js3em" path="res://scenes/HAWKTUAH os/hawktuah os.tscn" id="2_46l77"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_riaom"]
