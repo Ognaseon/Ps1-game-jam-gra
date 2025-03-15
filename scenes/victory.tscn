@@ -1,6 +1,9 @@
+
+[gd_scene load_steps=0 format=3 uid="uid://ba2xgautoabnt"]
 [gd_scene load_steps=2 format=3 uid="uid://ba2xgautoabnt"]
 
 [ext_resource type="FontFile" uid="uid://cpxje11p44lce" path="res://assets/monogram.ttf" id="1_le47n"]
+
 
 [node name="Victory" type="Node2D"]
 
