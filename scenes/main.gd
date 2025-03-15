@@ -44,6 +44,7 @@ func _process(delta: float) -> void:
 	if Global.health < 1:
 		$ui/deathscreen.show()
 	if Global.hurt == true:
+		$damage.play()
 		Global.hurt = false
 		$ui/hurt/AnimationPlayer.play("hurt")
 	

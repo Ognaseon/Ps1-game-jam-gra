@@ -174,7 +174,7 @@ func sundetection():
 							if node.ded == false:
 								Global.powerups.append(node.data[node.type])
 							node.ded = true
-							
+							$powerup.play()
 							get_node(result["collider"].get_path()).queue_free()
 							
 

@@ -1,4 +1,5 @@
 [gd_scene load_steps=26 format=3 uid="uid://drycuryk4elpk"]
+[gd_scene load_steps=23 format=3 uid="uid://drycuryk4elpk"]
 
 [ext_resource type="Script" uid="uid://csaqja2dma85s" path="res://scenes/main.gd" id="1_tefeu"]
 [ext_resource type="PackedScene" uid="uid://cbyu73jig5vp7" path="res://assets/mall/mall.glb" id="2_tipki"]
@@ -8,6 +9,7 @@
 [ext_resource type="Script" uid="uid://b8ea1i3aqe7e1" path="res://debug.gd" id="5_tipki"]
 [ext_resource type="Texture2D" uid="uid://0k5qb1tfsnk4" path="res://assets/sky.png" id="6_choun"]
 [ext_resource type="Texture2D" uid="uid://70x36536utnb" path="res://assets/blood-png-1.png" id="7_o6xl0"]
+[ext_resource type="AudioStream" uid="uid://blk2u65j3tjgo" path="res://assets/music/sfx/damage.wav" id="8_tipki"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_85g3d"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -385,6 +387,9 @@ libraries = {
 
 [node name="poweruptimer" type="Timer" parent="."]
 autostart = true
+
+[node name="damage" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_tipki")
 
 [connection signal="timeout" from="poweruptimer" to="." method="_on_poweruptimer_timeout"]
 
