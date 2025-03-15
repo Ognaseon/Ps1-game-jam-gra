@@ -25,6 +25,8 @@ func _process(delta: float) -> void:
 		$mainscreen.show()
 	if app == "internet":
 		$internet.show()
+	if app == "call":
+		$phone.show()
 	if app == "stats":
 		$stats.show()
 	for n in $mainscreen/buttons.get_children():
@@ -75,11 +77,17 @@ func _process(delta: float) -> void:
 			if bselected == 3:
 				app = "internet"
 				Global.phoneinput[0] = 0
+			if bselected == 0:
+				app = "call"
+				Global.phoneinput[0] = 0
 			
 	if app == "internet":
 		if Global.phoneinput[0] == 1:
 			app = "menu"
 	if app == "stats":
+		if Global.phoneinput[0] == 1:
+			app = "menu"
+	if app == "call":
 		if Global.phoneinput[0] == 1:
 			app = "menu"
 	
