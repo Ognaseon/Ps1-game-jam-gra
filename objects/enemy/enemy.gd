@@ -29,7 +29,7 @@ func _ready() -> void:
 	if type == "creep":
 		posy = 0.9
 	if type == "dodger":
-		posy = randf_range(3,10)
+		posy = randf_range(3,6)
 		speed = randf_range(0.5,1)
 		ispeed = speed
 		dia1 = dia
