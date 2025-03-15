@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://fh5l056tw50w"]
+[gd_scene load_steps=9 format=3 uid="uid://fh5l056tw50w"]
 
 [ext_resource type="Script" uid="uid://dy1h2cuj3pdu1" path="res://scenes/menus/settings.gd" id="1_del6v"]
+[ext_resource type="FontFile" uid="uid://cpxje11p44lce" path="res://assets/monogram.ttf" id="2_erjg3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iqt6j"]
 bg_color = Color(0, 0, 0, 1)
@@ -50,6 +51,7 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_iqt6j")
 
 [node name="Label" type="Label" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -64,6 +66,27 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Pick your difficulty:"
 label_settings = SubResource("LabelSettings_del6v")
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.2
+anchor_right = 0.5
+anchor_bottom = 0.2
+offset_left = -252.0
+offset_top = 50.0
+offset_right = 252.0
+offset_bottom = 126.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0.24, 0.252667, 1, 1)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("2_erjg3")
+theme_override_font_sizes/font_size = 64
+text = "pick ur difficulty:"
+horizontal_alignment = 1
+vertical_alignment = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1

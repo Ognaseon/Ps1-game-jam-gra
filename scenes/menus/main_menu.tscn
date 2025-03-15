@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bvh7uaxj816qn" path="res://assets/mall_FINAL.glb" id="1_6bivr"]
 [ext_resource type="Script" uid="uid://xxm1b5g7tpoq" path="res://scenes/menus/main_menu.gd" id="1_l6cm7"]
 [ext_resource type="AudioStream" uid="uid://cakfyvritqk08" path="res://assets/music/kurwanwm.ogg" id="2_ovrgc"]
+[ext_resource type="FontFile" uid="uid://cpxje11p44lce" path="res://assets/monogram.ttf" id="3_imvie"]
 [ext_resource type="PackedScene" uid="uid://fh5l056tw50w" path="res://scenes/menus/settings.tscn" id="4_6bivr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2o76q"]
@@ -72,9 +73,6 @@ corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
-
-[sub_resource type="LabelSettings" id="LabelSettings_vue75"]
-font_size = 48
 
 [sub_resource type="LabelSettings" id="LabelSettings_6bivr"]
 font_size = 64
@@ -161,6 +159,8 @@ theme_override_constants/separation = 15
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_imvie")
+theme_override_font_sizes/font_size = 32
 theme_override_styles/focus = SubResource("StyleBoxEmpty_vue75")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ekxnf")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_bqqt6")
@@ -171,6 +171,8 @@ text = "Start Game"
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_imvie")
+theme_override_font_sizes/font_size = 32
 theme_override_styles/focus = SubResource("StyleBoxEmpty_vue75")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ekxnf")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_bqqt6")
@@ -181,6 +183,8 @@ text = "Options"
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_imvie")
+theme_override_font_sizes/font_size = 32
 theme_override_styles/focus = SubResource("StyleBoxEmpty_vue75")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ekxnf")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_bqqt6")
@@ -200,8 +204,11 @@ offset_right = 97.0
 offset_bottom = 34.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "ungovernable"
-label_settings = SubResource("LabelSettings_vue75")
+theme_override_colors/font_outline_color = Color(0.24, 0.252667, 1, 1)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("3_imvie")
+theme_override_font_sizes/font_size = 96
+text = "ungovbearnable"
 horizontal_alignment = 1
 vertical_alignment = 3
 
@@ -215,6 +222,18 @@ visible = false
 
 [node name="Panel" parent="CanvasLayer/Settings" index="0"]
 visible = false
+
+[node name="Easy" parent="CanvasLayer/Settings/HBoxContainer" index="0"]
+theme_override_fonts/font = ExtResource("3_imvie")
+theme_override_font_sizes/font_size = 32
+
+[node name="Medium" parent="CanvasLayer/Settings/HBoxContainer" index="1"]
+theme_override_fonts/font = ExtResource("3_imvie")
+theme_override_font_sizes/font_size = 32
+
+[node name="Hard" parent="CanvasLayer/Settings/HBoxContainer" index="2"]
+theme_override_fonts/font = ExtResource("3_imvie")
+theme_override_font_sizes/font_size = 32
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 offset_left = 779.0
