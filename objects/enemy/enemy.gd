@@ -51,8 +51,9 @@ func _physics_process(delta: float) -> void:
 		slowed = true
 		speed = ispeed /3
 	if Global.activepowerups["freeze"] == true:
-		var freeze_tween = create_tween()
-		freeze_tween.tween_property($Sprite3D, 'modulate', Color('86a7ff'), 1)
+		if dead == false:
+			var freeze_tween = create_tween()
+			freeze_tween.tween_property($Sprite3D, 'modulate', Color('86a7ff'), 1)
 		speed = 0
 		freeze = true
 	else:
