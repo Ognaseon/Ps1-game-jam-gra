@@ -46,6 +46,7 @@ func status_effects_look():
 	if Global.activepowerups["shield"] == true and can_shield:
 		$ui/AnimationPlayer.play("im_god")
 		can_shield = false
+		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -108,7 +109,7 @@ func deleteBullet(bulletid):
 			n.scale.x = 50
 			n.queue_free()
 
-
 func _on_poweruptimer_timeout() -> void:
+	can_shield = true
 	$poweruptimer.wait_time = 1# randi_range(10,20)
 	spawnpowerup()
