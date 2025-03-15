@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://d1uirxt68cgix" path="res://objects/items/mirror/mirror.tscn" id="4_jnjyq"]
 [ext_resource type="PackedScene" uid="uid://dlik7japt0s25" path="res://objects/items/phone/phone.tscn" id="5_gnkmh"]
 [ext_resource type="AudioStream" uid="uid://cgs8n6k5vl00c" path="res://assets/music/sfx/girly gunshot uwu 2.1.wav" id="6_xkryw"]
+[ext_resource type="AudioStream" uid="uid://beqq23t1bhjli" path="res://assets/music/sfx/powerup.wav" id="7_ow0dq"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_g7ett"]
 
@@ -105,5 +106,10 @@ texture = SubResource("ViewportTexture_jnjyq")
 
 [node name="shoot" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_xkryw")
+
+[node name="powerup" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_ow0dq")
+
+[node name="damage" type="AudioStreamPlayer" parent="."]
 
 [editable path="Mirror"]
