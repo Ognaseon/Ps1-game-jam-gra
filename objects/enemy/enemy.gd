@@ -75,8 +75,8 @@ func _physics_process(delta: float) -> void:
 		if dead == false:
 			$AnimationPlayer.play("shake")
 		scared = true
-	if dia < 25:
-		dia += delta
+		if dia < 25:
+			dia += delta
 #	$Label3D2.text = "state: " + str(state)
 	if Global.health <1:
 		return
@@ -130,12 +130,7 @@ func _physics_process(delta: float) -> void:
 			angle += delta * speed * dir
 			dia -= delta/2
 			$Sprite3D.modulate = Color(0,0,1,1)
-	
 
-
-
-
-		
 	if dead == true:
 		$GPUParticles3D.emitting = true
 		if fallin == true:

@@ -1,3 +1,37 @@
+
 [gd_scene load_steps=0 format=3 uid="uid://ba2xgautoabnt"]
+[gd_scene load_steps=2 format=3 uid="uid://ba2xgautoabnt"]
+
+[ext_resource type="FontFile" uid="uid://cpxje11p44lce" path="res://assets/monogram.ttf" id="1_le47n"]
+
 
 [node name="Victory" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -180.0
+offset_top = 42.0
+offset_right = 180.0
+offset_bottom = 276.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0.24, 0.252667, 1, 1)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("1_le47n")
+theme_override_font_sizes/font_size = 96
+text = "You won!
+glory to
+hawk tuah!"
+horizontal_alignment = 1
+vertical_alignment = 3
