@@ -11,7 +11,7 @@ var phoneinput = [0,0,0,0,0]
 var powerups = []
 var maxhealth = 10
 var activepowerups = {"slowdown":false,"freeze":false,"shield":false,"invincibility":false,
-"scary": false, "reflection": false, "laser": false, "megashot": false}
+"scary": false, "reflection": false, "laser": true, "megashot": false}
 
 
 func _ready() -> void:

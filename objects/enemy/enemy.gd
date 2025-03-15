@@ -16,6 +16,8 @@ var dir = 1
 var dia1 = 0
 var slowness = 0
 var ispeed = 0
+
+var freeze_tween = create_tween()
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	ispeed = speed
@@ -29,7 +31,7 @@ func _ready() -> void:
 		ispeed = speed
 		dia1 = dia
 	if type == "flying":
-		posy = randf_range(2,8)
+		posy = randf_range(2,4)
 	
 	
 	#$Label3D.text = "type: " + type
@@ -47,8 +49,13 @@ func _physics_process(delta: float) -> void:
 		slowed = true
 		speed = ispeed /3
 	if Global.activepowerups["freeze"] == true:
+		var freeze_tween = create_tween()
+		freeze_tween.tween_property($Sprite3D, 'modulate', Color('86a7ff'), 1)
 		speed = 0
 		freeze = true
+	else:
+		var freeze_tween = create_tween()
+		freeze_tween.tween_property($Sprite3D, 'modulate', Color('ffffff'), 1)
 	if Global.activepowerups["shield"] == true:
 		week = true
 	if Global.activepowerups["scary"] == true:
