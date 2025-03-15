@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dnb04daoumwie" path="res://objects/enemy/enemy.gd" id="1_1rjq7"]
 [ext_resource type="Texture2D" uid="uid://okkpi245csxx" path="res://assets/snail.png" id="2_ecd4o"]
 [ext_resource type="Texture2D" uid="uid://c5tap4qx0ijyu" path="res://icon.svg" id="2_vc3w8"]
-[ext_resource type="Texture2D" uid="uid://bwg3jxq7keg6e" path="res://assets/images-6.jpeg" id="3_vc3w8"]
+[ext_resource type="Texture2D" uid="uid://dy84xsftrn530" path="res://objects/enemy/red-splatter-13-1.png" id="4_ecd4o"]
 [ext_resource type="Texture2D" uid="uid://c7plwqjnro1gc" path="res://assets/blood.png" id="4_esv4w"]
 [ext_resource type="AudioStream" uid="uid://d0l1jogmjy0v2" path="res://assets/music/sfx/mis_death.wav" id="5_gnbxk"]
 [ext_resource type="AudioStream" uid="uid://71td486ww2qx" path="res://assets/music/sfx/mis_death_v2.wav" id="6_ecd4o"]
@@ -124,16 +124,12 @@ spread = 180.0
 initial_velocity_min = 3.77
 initial_velocity_max = 7.64
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c38me"]
-render_priority = 4
-shading_mode = 0
-albedo_color = Color(1, 0, 0, 1)
-albedo_texture = ExtResource("3_vc3w8")
-heightmap_scale = 0.205
-billboard_mode = 1
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5umcj"]
+transparency = 1
+albedo_texture = ExtResource("4_ecd4o")
 
 [sub_resource type="QuadMesh" id="QuadMesh_gnbxk"]
-material = SubResource("StandardMaterial3D_c38me")
+material = SubResource("StandardMaterial3D_5umcj")
 subdivide_width = 1
 subdivide_depth = 1
 
