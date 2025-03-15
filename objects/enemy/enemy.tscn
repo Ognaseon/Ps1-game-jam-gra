@@ -1,11 +1,24 @@
-[gd_scene load_steps=14 format=3 uid="uid://dcqtmafugn0bp"]
+[gd_scene load_steps=21 format=3 uid="uid://dcqtmafugn0bp"]
 
 [ext_resource type="Script" uid="uid://dnb04daoumwie" path="res://objects/enemy/enemy.gd" id="1_1rjq7"]
+[ext_resource type="Texture2D" uid="uid://okkpi245csxx" path="res://assets/snail.png" id="2_ecd4o"]
 [ext_resource type="Texture2D" uid="uid://c5tap4qx0ijyu" path="res://icon.svg" id="2_vc3w8"]
 [ext_resource type="Texture2D" uid="uid://bwg3jxq7keg6e" path="res://assets/images-6.jpeg" id="3_vc3w8"]
 [ext_resource type="Texture2D" uid="uid://c7plwqjnro1gc" path="res://assets/blood.png" id="4_esv4w"]
+[ext_resource type="AudioStream" uid="uid://d0l1jogmjy0v2" path="res://assets/music/sfx/mis_death.wav" id="5_gnbxk"]
+[ext_resource type="AudioStream" uid="uid://71td486ww2qx" path="res://assets/music/sfx/mis_death_v2.wav" id="6_ecd4o"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_1rjq7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2ghy8"]
+transparency = 1
+albedo_color = Color(0, 0, 0, 1)
+albedo_texture = ExtResource("2_ecd4o")
+billboard_mode = 2
+
+[sub_resource type="QuadMesh" id="QuadMesh_5umcj"]
+material = SubResource("StandardMaterial3D_2ghy8")
+size = Vector2(0.75, 0.75)
 
 [sub_resource type="Animation" id="Animation_vc3w8"]
 length = 0.001
@@ -20,6 +33,30 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StatusEffects/Slowdown:mesh:material:albedo_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_1rjq7"]
@@ -38,10 +75,43 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_gnbxk"]
+resource_name = "shake"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.07, 0.13, 0.23, 0.33, 0.45, 0.55, 0.65),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.065, -0.072, 0), Vector3(0, 0.135, 0), Vector3(0.1, 0.135, 0), Vector3(-0.11, 0.045, 0), Vector3(0.09, 0.155, 0), Vector3(-0.28, -0.06, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ecd4o"]
+resource_name = "ease_out_snail"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StatusEffects/Slowdown:mesh:material:albedo_color")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_esv4w"]
 _data = {
 &"RESET": SubResource("Animation_vc3w8"),
-&"die": SubResource("Animation_1rjq7")
+&"die": SubResource("Animation_1rjq7"),
+&"ease_out_snail": SubResource("Animation_ecd4o"),
+&"shake": SubResource("Animation_gnbxk")
 }
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_esv4w"]
@@ -83,6 +153,16 @@ script = ExtResource("1_1rjq7")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_1rjq7")
 
+[node name="StatusEffects" type="Node3D" parent="."]
+transform = Transform3D(0.82, 0, 0, 0, 0.82, 0, 0, 0, 0.82, 0, 0, 0)
+
+[node name="Slowdown" type="MeshInstance3D" parent="StatusEffects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35, 0)
+mesh = SubResource("QuadMesh_5umcj")
+
+[node name="Slowdown_timer" type="Timer" parent="StatusEffects"]
+one_shot = true
+
 [node name="Sprite3D" type="Sprite3D" parent="."]
 billboard = 2
 render_priority = 1
@@ -110,20 +190,6 @@ explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_esv4w")
 draw_pass_1 = SubResource("QuadMesh_gnbxk")
 
-[node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12924, 0)
-billboard = 1
-render_priority = 1
-text = "hello there i lkie cows and oder animalz"
-font_size = 76
-
-[node name="Label3D2" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6943, 0)
-billboard = 1
-render_priority = 1
-text = "state"
-font_size = 76
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.619119, 0)
 top_level = true
@@ -134,6 +200,13 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.
 visible = false
 texture = ExtResource("4_esv4w")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_gnbxk")
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_ecd4o")
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="StatusEffects/Slowdown_timer" to="." method="_on_slowdown_timer_timeout"]
 [connection signal="timeout" from="BulletSpawnTime" to="." method="_on_bullet_spawn_time_timeout"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

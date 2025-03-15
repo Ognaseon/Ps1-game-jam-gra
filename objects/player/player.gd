@@ -20,7 +20,11 @@ var jump_vel: Vector3 # Jumping velocity
 
 @onready var camera: Camera3D = $Camera
 
-
+var fast_rotate_state = false
+@export var fast_rotate_speed = 8
+var current_rotation = 0.0
+var last_angle = 0.0
+var target_rotation = 0.0
 
 var raysep = 6
 var rayamount = Vector2(3,3)
@@ -30,6 +34,14 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	sundetection()
+	if Global.activepowerups["megashot"] == true:
+		raysep = 24
+		rayamount = Vector2(5,5)
+	else:
+		raysep = 6
+		rayamount = Vector2(3,3)
+	if Input.is_action_just_pressed("shoot"):
+		$shoot.play()
 
 
 func _unhandled_input(event):
@@ -43,7 +55,7 @@ func _physics_process(delta: float) -> void:
 	if mouse_captured: _handle_joypad_camera_rotation(delta)
 	velocity = _walk(delta) + _gravity(delta) + _jump(delta)
 	
-	_rotate_camera()
+	_rotate_camera(delta)
 	move_and_slide()
 
 func capture_mouse() -> void:
@@ -54,13 +66,33 @@ func release_mouse() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	mouse_captured = false
 
-func _rotate_camera(sens_mod: float = 0.03) -> void:
+func _rotate_camera(delta) -> void:
+	if Input.is_action_just_pressed("rotate_180"):
+		fast_rotate_state = true
+		current_rotation = Global.camrot
+	if fast_rotate_state:
+		if current_rotation > last_angle: 
+			rotation_side(1, delta)
+		else:
+			rotation_side(-1, delta)
+	else:
+		last_angle = Global.camrot		
+				
 	$SubViewport/Camera2.rotation_degrees = camera.rotation_degrees - Vector3(-10,180,0)
 	$SubViewport/Camera2.position = $Camera.global_position + $Camera.transform.basis.z * 0.5
-	Global.camrot -= Input.get_axis("rotate_left", "rotate_right") * camera_sens * sens_mod
+
+	Global.camrot -= Input.get_axis("rotate_left", "rotate_right") * camera_sens * delta
 	camera.rotation.y = Global.camrot
 	
 	#camera.rotation.x = clamp(camera.rotation.x - look_dir.y * camera_sens * sens_mod, -1.5, 1.5)
+		
+func rotation_side(side, delta):
+	target_rotation = current_rotation + deg_to_rad(180) * side
+	Global.camrot = lerpf(Global.camrot, target_rotation + deg_to_rad(10) * side, delta * fast_rotate_speed)
+	if Global.camrot * side >= target_rotation * side:
+		Global.camrot = target_rotation
+		fast_rotate_state = false
+
 
 func _handle_joypad_camera_rotation(delta: float, sens_mod: float = 1.0) -> void:
 	return
@@ -72,7 +104,7 @@ func _handle_joypad_camera_rotation(delta: float, sens_mod: float = 1.0) -> void
 		look_dir = Vector2.ZERO
 
 func _walk(delta: float) -> Vector3:
-
+	return Vector3(0,0,0)
 	move_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	var _forward: Vector3 = camera.global_transform.basis * Vector3(move_dir.x, 0, move_dir.y)
 	var walk_dir: Vector3 = Vector3(_forward.x, 0, _forward.z).normalized()
@@ -85,6 +117,7 @@ func _gravity(delta: float) -> Vector3:
 	return grav_vel
 
 func _jump(delta: float) -> Vector3:
+	return Vector3(0,0,0)
 	if jumping:
 		if is_on_floor(): jump_vel = Vector3(0, sqrt(4 * jump_height * gravity), 0)
 		jumping = false
@@ -117,16 +150,34 @@ func sundetection():
 			
 			var result = space_state.intersect_ray(query)
 			if result.has("collider"):
+				var laser = false
+				if Global.activepowerups["laser"] == true:
+					laser = true
+				
 				if (result["collider"].get_class()) == "Area3D":
 					if (get_node(result["collider"].get_path()).is_in_group("enemy")):
 						get_node(result["collider"].get_path()).oncursor[0] = true
 						if Input.is_action_just_pressed("shoot"):
 							get_parent().deleteEnemy(result["collider"])
 							return
+						if laser == true:
+							get_parent().deleteEnemy(result["collider"])
 					if (get_node(result["collider"].get_path()).is_in_group("bullet")):
 						if Input.is_action_just_pressed("shoot"):
 							get_parent().deleteBullet(result["collider"])
 							print("eh")
+						if laser == true:
+							get_parent().deleteBullet(result["collider"])
+					if (get_node(result["collider"].get_path()).is_in_group("powerup")):
+						if Input.is_action_just_pressed("shoot"):
+							var node = get_node(result["collider"].get_path())
+							if node.ded == false:
+								Global.powerups.append(node.data[node.type])
+							node.ded = true
+							Global.powerupstaken += 1
+							$powerup.play()
+							get_node(result["collider"].get_path()).queue_free()
+							
 
 #func _unhandled_input(event: InputEvent) -> void:
 	#if event is InputEventMouseMotion:

@@ -49,3 +49,15 @@ offset_right = 408.643
 offset_bottom = 398.975
 rotation = -0.694641
 color = Color(1, 1, 1, 0.313726)
+
+[node name="time" type="Label" parent="."]
+offset_left = 185.195
+offset_top = 220.223
+offset_right = 304.195
+offset_bottom = 287.223
+scale = Vector2(0.7, 0.7)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 0
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 48
+text = "Q"

@@ -1,7 +1,51 @@
-[gd_scene load_steps=9 format=3 uid="uid://bv80gawdp7sku"]
+[gd_scene load_steps=18 format=3 uid="uid://bv80gawdp7sku"]
 
+[ext_resource type="PackedScene" uid="uid://bvh7uaxj816qn" path="res://assets/mall_FINAL.glb" id="1_6bivr"]
 [ext_resource type="Script" uid="uid://xxm1b5g7tpoq" path="res://scenes/menus/main_menu.gd" id="1_l6cm7"]
 [ext_resource type="AudioStream" uid="uid://cakfyvritqk08" path="res://assets/music/kurwanwm.ogg" id="2_ovrgc"]
+[ext_resource type="PackedScene" uid="uid://fh5l056tw50w" path="res://scenes/menus/settings.tscn" id="4_6bivr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2o76q"]
+shading_mode = 0
+albedo_color = Color(0.0986667, 0, 0.16, 1)
+
+[sub_resource type="Animation" id="Animation_6bivr"]
+resource_name = "spin"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.124215, 0, 0), Vector3(0.123918, 6.28319, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_2o76q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.124215, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_imvie"]
+_data = {
+&"RESET": SubResource("Animation_2o76q"),
+&"spin": SubResource("Animation_6bivr")
+}
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l6cm7"]
 bg_color = Color(0, 0, 0, 1)
@@ -32,7 +76,45 @@ corner_radius_bottom_left = 8
 [sub_resource type="LabelSettings" id="LabelSettings_vue75"]
 font_size = 48
 
-[node name="MainMenu" type="Control"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2o76q"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_choun"]
+sky_material = SubResource("ProceduralSkyMaterial_2o76q")
+
+[sub_resource type="Environment" id="Environment_6bivr"]
+background_mode = 2
+background_energy_multiplier = 0.5
+sky = SubResource("Sky_choun")
+tonemap_mode = 2
+
+[node name="Node3D" type="Node3D"]
+
+[node name="mall_FINAL" parent="." instance=ExtResource("1_6bivr")]
+transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 0, 0, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.999996, 0, 0, 0, 0.999996, -2.88275, 18.0334, -1.15995)
+size = Vector3(56.2277, 1, 42.8992)
+material = SubResource("StandardMaterial3D_2o76q")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.992295, -0.123896, 0, 0.123896, 0.992295, 0, 2.58912, 0.636498)
+projection = 2
+fov = 39.4
+size = 3.0
+near = 0.659
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera3D"]
+libraries = {
+&"": SubResource("AnimationLibrary_imvie")
+}
+autoplay = "spin"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MainMenu" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -41,7 +123,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_l6cm7")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="CanvasLayer/MainMenu"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -50,7 +133,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_l6cm7")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainMenu"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.284
@@ -65,7 +148,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 15
 
-[node name="StartGame" type="Button" parent="VBoxContainer"]
+[node name="StartGame" type="Button" parent="CanvasLayer/MainMenu/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -75,7 +158,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_bqqt6")
 theme_override_styles/normal = SubResource("StyleBoxFlat_vue75")
 text = "Start Game"
 
-[node name="Options" type="Button" parent="VBoxContainer"]
+[node name="Options" type="Button" parent="CanvasLayer/MainMenu/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -85,7 +168,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_bqqt6")
 theme_override_styles/normal = SubResource("StyleBoxFlat_vue75")
 text = "Options"
 
-[node name="Exit" type="Button" parent="VBoxContainer"]
+[node name="Exit" type="Button" parent="CanvasLayer/MainMenu/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -95,7 +178,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_bqqt6")
 theme_override_styles/normal = SubResource("StyleBoxFlat_vue75")
 text = "Exit"
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="CanvasLayer/MainMenu"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -108,17 +191,45 @@ offset_right = 97.0
 offset_bottom = 34.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "test title"
+text = "ungovernable"
 label_settings = SubResource("LabelSettings_vue75")
 horizontal_alignment = 1
 vertical_alignment = 3
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer/MainMenu"]
 stream = ExtResource("2_ovrgc")
 autoplay = true
+parameters/looping = true
 
-[connection signal="pressed" from="VBoxContainer/StartGame" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/StartGame" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="VBoxContainer/StartGame" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_button_3_pressed"]
 [connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+
+[node name="Settings" parent="CanvasLayer" instance=ExtResource("4_6bivr")]
+visible = false
+
+[node name="Panel" parent="CanvasLayer/Settings" index="0"]
+visible = false
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.694935, 0.719073, 0, -0.719073, 0.694935, 0, 6.06508, 0)
+light_color = Color(0.6, 0, 1, 1)
+light_energy = 2.467
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_6bivr")
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-1, 6.28867e-08, -6.0729e-08, 0, 0.694658, 0.71934, 8.74228e-08, 0.71934, -0.694658, 0, 6.06508, 0)
+light_color = Color(0.6, 0, 1, 1)
+light_energy = 2.467
+
+[connection signal="pressed" from="CanvasLayer/MainMenu/VBoxContainer/StartGame" to="CanvasLayer/MainMenu" method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/VBoxContainer/StartGame" to="CanvasLayer/MainMenu" method="_on_start_game_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/VBoxContainer/Options" to="CanvasLayer/MainMenu" method="_on_button_3_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/VBoxContainer/Options" to="CanvasLayer/MainMenu" method="_on_options_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/VBoxContainer/Exit" to="CanvasLayer/MainMenu" method="_on_exit_pressed"]
+
+[editable path="CanvasLayer/Settings"]

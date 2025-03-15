@@ -1,10 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://b0bn1arlly08a"]
+[gd_scene load_steps=15 format=3 uid="uid://b0bn1arlly08a"]
 
 [ext_resource type="Script" uid="uid://dng2w5711i4mu" path="res://objects/player/player.gd" id="1_cqmt1"]
 [ext_resource type="Shader" uid="uid://bw2r3l7vpeves" path="res://presets/player.gdshader" id="2_g7ett"]
 [ext_resource type="Texture2D" uid="uid://0k5qb1tfsnk4" path="res://assets/sky.png" id="3_ssrue"]
 [ext_resource type="PackedScene" uid="uid://d1uirxt68cgix" path="res://objects/items/mirror/mirror.tscn" id="4_jnjyq"]
 [ext_resource type="PackedScene" uid="uid://dlik7japt0s25" path="res://objects/items/phone/phone.tscn" id="5_gnkmh"]
+[ext_resource type="AudioStream" uid="uid://cgs8n6k5vl00c" path="res://assets/music/sfx/girly gunshot uwu 2.1.wav" id="6_xkryw"]
+[ext_resource type="AudioStream" uid="uid://beqq23t1bhjli" path="res://assets/music/sfx/powerup.wav" id="7_ow0dq"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_g7ett"]
 
@@ -42,6 +44,7 @@ viewport_path = NodePath("SubViewport")
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
 script = ExtResource("1_cqmt1")
+camera_sens = 1.2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_g7ett")
@@ -65,7 +68,7 @@ skeleton = NodePath("../..")
 [node name="CSGBox3D" type="CSGBox3D" parent="SubViewport/Camera2"]
 
 [node name="Camera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.18285, -0.0705673)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0058198, 1.18285, -0.0731766)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Camera"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.118113, -1.60939)
@@ -100,5 +103,13 @@ texture = ExtResource("3_ssrue")
 texture = SubResource("ViewportTexture_jnjyq")
 
 [node name="Phone" parent="." instance=ExtResource("5_gnkmh")]
+
+[node name="shoot" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_xkryw")
+
+[node name="powerup" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_ow0dq")
+
+[node name="damage" type="AudioStreamPlayer" parent="."]
 
 [editable path="Mirror"]

@@ -1,20 +1,56 @@
-[gd_scene load_steps=22 format=3 uid="uid://drycuryk4elpk"]
+[gd_scene load_steps=31 format=3 uid="uid://drycuryk4elpk"]
 
-[ext_resource type="Texture2D" uid="uid://dgqc2evuy18yl" path="res://assets/tileable-img_0062-dark.png" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://csaqja2dma85s" path="res://scenes/main.gd" id="1_tefeu"]
+[ext_resource type="PackedScene" uid="uid://cbyu73jig5vp7" path="res://assets/mall/mall.glb" id="2_tipki"]
 [ext_resource type="PackedScene" uid="uid://b0bn1arlly08a" path="res://objects/player/player.tscn" id="4_jyhfs"]
+[ext_resource type="Shader" uid="uid://x82q1flhcbie" path="res://presets/shine_armor.gdshader" id="5_choun"]
 [ext_resource type="Texture2D" uid="uid://bwg3jxq7keg6e" path="res://assets/images-6.jpeg" id="5_tbgi4"]
 [ext_resource type="Texture2D" uid="uid://b6io6t3oq8anm" path="res://assets/stupid cursor.png" id="5_tefeu"]
+[ext_resource type="Script" uid="uid://b8ea1i3aqe7e1" path="res://debug.gd" id="5_tipki"]
 [ext_resource type="Texture2D" uid="uid://0k5qb1tfsnk4" path="res://assets/sky.png" id="6_choun"]
+
+[gd_scene load_steps=27 format=3 uid="uid://drycuryk4elpk"]
+
+[ext_resource type="Script" uid="uid://csaqja2dma85s" path="res://scenes/main.gd" id="1_tefeu"]
+[ext_resource type="PackedScene" path="res://objects/player/player.tscn" id="4_jyhfs"]
+[ext_resource type="Texture2D" uid="uid://bwg3jxq7keg6e" path="res://assets/images-6.jpeg" id="5_tbgi4"]
+[ext_resource type="Texture2D" uid="uid://b6io6t3oq8anm" path="res://assets/stupid cursor.png" id="5_tefeu"]
+[ext_resource type="Script" path="res://debug.gd" id="5_tipki"]
+
 [ext_resource type="Texture2D" uid="uid://70x36536utnb" path="res://assets/blood-png-1.png" id="7_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://bvh7uaxj816qn" path="res://assets/mall_FINAL.glb" id="8_85g3d"]
+[ext_resource type="AudioStream" uid="uid://blk2u65j3tjgo" path="res://assets/music/sfx/damage.wav" id="8_tipki"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0wfyh"]
-albedo_texture = ExtResource("1_o5qli")
-uv1_triplanar = true
-uv2_triplanar = true
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_85g3d"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_sugp2"]
-size = Vector3(83.2486, 1, 85.0421)
+[sub_resource type="Sky" id="Sky_85g3d"]
+sky_material = SubResource("ProceduralSkyMaterial_85g3d")
+
+[sub_resource type="Environment" id="Environment_ya4ey"]
+background_mode = 2
+sky = SubResource("Sky_85g3d")
+tonemap_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_85g3d"]
+albedo_color = Color(0.52, 0.28, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ya4ey"]
+shader = ExtResource("5_choun")
+shader_parameter/kelvin = 1000.0
+shader_parameter/red_colour = 7.4
+shader_parameter/green_colour = 5.6
+shader_parameter/blue_colour = 4.4
+shader_parameter/time_factor = 1.5
+shader_parameter/move = false
+shader_parameter/resolution = 0.4
+shader_parameter/sin_roll = 0.25
+shader_parameter/cos_roll = 0.25
+shader_parameter/alpha = 0.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_tipki"]
+font_size = 12
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jyhfs"]
 bg_color = Color(0, 0, 0, 1)
@@ -48,6 +84,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StatusEffects/ColorRect:material:shader_parameter/alpha")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_jyhfs"]
 resource_name = "flash"
@@ -65,10 +113,26 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
+[sub_resource type="Animation" id="Animation_ya4ey"]
+resource_name = "im_god"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StatusEffects/ColorRect:material:shader_parameter/alpha")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.8, 0.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tefeu"]
 _data = {
 &"RESET": SubResource("Animation_tbgi4"),
-&"flash": SubResource("Animation_jyhfs")
+&"flash": SubResource("Animation_jyhfs"),
+&"im_god": SubResource("Animation_ya4ey")
 }
 
 [sub_resource type="Animation" id="Animation_choun"]
@@ -143,59 +207,33 @@ _data = {
 &"hurt": SubResource("Animation_tipki")
 }
 
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_tipki"]
+data = PackedVector3Array(-0.4306, 0, 0.4305, 0, 0, 0, 0, 0, 0.4583, -0.3646, 0, 0.8541, -0.4306, 0, 0.4305, 0, 0, 0.4583, -0.6719, 0, 0.6719, -0.4306, 0, 0.4305, -0.3646, 0, 0.8541, -0.3646, 0, 0.8541, 0, 0, 0.4583, 0, 0, 0.9167, -0.6719, 0, 0.6719, -0.8542, 0, 0.3646, -0.4306, 0, 0.4305, -0.8542, 0, 0.3646, -0.4584, 0, 0, -0.4306, 0, 0.4305, -0.4306, 0, 0.4305, -0.4584, 0, 0, 0, 0, 0, -0.8542, 0, 0.3646, -0.9167, 0, 0, -0.4584, 0, 0, 0, 0, 0.9167, 0, 0, 0.4583, 0.4305, 0, 0.4305, 0, 0, 0.9167, 0.4305, 0, 0.4305, 0.3646, 0, 0.8541, 0.3646, 0, 0.8541, 0.4305, 0, 0.4305, 0.8541, 0, 0.3646, 0.3646, 0, 0.8541, 0.8541, 0, 0.3646, 0.6719, 0, 0.6719, 0.4305, 0, 0.4305, 0.9167, 0, 0, 0.8541, 0, 0.3646, 0, 0, 0.4583, 0.4583, 0, 0, 0.4305, 0, 0.4305, 0.4305, 0, 0.4305, 0.4583, 0, 0, 0.9167, 0, 0, 0, 0, 0.4583, 0, 0, 0, 0.4583, 0, 0, 0.4583, 0, 0, 0.8541, 0, -0.3646, 0.9167, 0, 0, 0.4583, 0, 0, 0.4305, 0, -0.4306, 0.8541, 0, -0.3646, 0, 0, 0, 0.4305, 0, -0.4306, 0.4583, 0, 0, 0.4305, 0, -0.4306, 0.6719, 0, -0.6719, 0.8541, 0, -0.3646, 0.4305, 0, -0.4306, 0.3646, 0, -0.8542, 0.6719, 0, -0.6719, 0, 0, 0, 0, 0, -0.4584, 0.4305, 0, -0.4306, 0, 0, -0.4584, 0.3646, 0, -0.8542, 0.4305, 0, -0.4306, -0.4584, 0, 0, 0, 0, -0.4584, 0, 0, 0, 0, 0, -0.4584, 0, 0, -0.9167, 0.3646, 0, -0.8542, -0.4584, 0, 0, -0.4306, 0, -0.4306, 0, 0, -0.4584, -0.4306, 0, -0.4306, 0, 0, -0.9167, 0, 0, -0.4584, -0.9167, 0, 0, -0.4306, 0, -0.4306, -0.4584, 0, 0, -0.4306, 0, -0.4306, -0.3646, 0, -0.8542, 0, 0, -0.9167, -0.9167, 0, 0, -0.8542, 0, -0.3646, -0.4306, 0, -0.4306, -0.8542, 0, -0.3646, -0.3646, 0, -0.8542, -0.4306, 0, -0.4306, -0.8542, 0, -0.3646, -0.6719, 0, -0.6719, -0.3646, 0, -0.8542)
+
 [node name="Main" type="Node3D"]
 script = ExtResource("1_tefeu")
 
-[node name="ground" type="StaticBody3D" parent="." groups=["ground"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.27222)
-
-[node name="CSGBox3D" type="CSGBox3D" parent="ground"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.69236, -0.317346, 14.6131)
-size = Vector3(85.0413, 1, 79.3863)
-material = SubResource("StandardMaterial3D_0wfyh")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ground"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.56349, 0, 13.5259)
-shape = SubResource("BoxShape3D_sugp2")
-
-[node name="skybox" type="Node3D" parent="."]
-visible = false
-
-[node name="Sprite3D2" type="Sprite3D" parent="skybox"]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 31.407, -32.0736)
-transparent = false
-texture = ExtResource("6_choun")
-
-[node name="Sprite3D3" type="Sprite3D" parent="skybox"]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 31.407, 43.8728)
-transparent = false
-texture = ExtResource("6_choun")
-
-[node name="Sprite3D4" type="Sprite3D" parent="skybox"]
-transform = Transform3D(-1.38565e-07, 0, -5, 0, 5, 0, 3.17, 0, -2.18557e-07, 37.9728, 31.407, 5.72062)
-sorting_offset = -6.02
-transparent = false
-texture = ExtResource("6_choun")
-
-[node name="Sprite3D5" type="Sprite3D" parent="skybox"]
-transform = Transform3D(-1.29386e-07, 0, -3.99, 0, 3.99, 0, 2.96, 0, -1.74408e-07, -37.9728, 31.407, 6.07851)
-sorting_offset = 9.38
-transparent = false
-texture = ExtResource("6_choun")
-
-[node name="Sprite3D6" type="Sprite3D" parent="skybox"]
-transform = Transform3D(5, 0, 0, 0, -2.18557e-07, 5, 0, -5, -2.18557e-07, -9.01141, 50.8076, -4.08443)
-sorting_offset = -25.21
-transparent = false
-texture = ExtResource("6_choun")
-
 [node name="sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.0117632, 0.999931, 0, -0.999931, -0.0117632, 0, 0, 0)
+light_color = Color(0.850576, 6.257e-06, 0.533971, 1)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ya4ey")
+
+[node name="skybox" type="Node3D" parent="."]
+transform = Transform3D(1.67, 0, 0, 0, 1.67, 0, 0, 0, 1.67, 0, 0, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="skybox"]
+transform = Transform3D(0.598803, 0, 0, 0, 0.598803, 0, 0, 0, 0.598803, -2.50201, 11.932, -2.39235)
+size = Vector3(88.3542, 1, 86.3129)
+material = SubResource("StandardMaterial3D_85g3d")
 
 [node name="enemies" type="Node3D" parent="."]
 
+[node name="powerup" type="Node3D" parent="."]
+
 [node name="Player" parent="." groups=["player"] instance=ExtResource("4_jyhfs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.38075, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.68458, 0)
 
 [node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.793686, -0.512939, 7.65154)
@@ -204,6 +242,24 @@ size = Vector3(93.4911, 0.974121, 81.3637)
 [node name="bullets" type="Node3D" parent="."]
 
 [node name="ui" type="CanvasLayer" parent="."]
+
+[node name="StatusEffects" type="Control" parent="ui"]
+z_index = -1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="ui/StatusEffects"]
+material = SubResource("ShaderMaterial_ya4ey")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Label" type="Label" parent="ui"]
 offset_left = 8.0
@@ -214,7 +270,19 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 15
 text = "score: elo melo"
 
+[node name="Debug" type="Label" parent="ui"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -305.0
+offset_bottom = 273.0
+grow_horizontal = 0
+label_settings = SubResource("LabelSettings_tipki")
+autowrap_mode = 2
+script = ExtResource("5_tipki")
+
 [node name="lives" type="ProgressBar" parent="ui"]
+visible = false
 offset_left = 5.0
 offset_top = 6.0
 offset_right = 292.0
@@ -357,3 +425,21 @@ texture = ExtResource("7_o6xl0")
 libraries = {
 &"": SubResource("AnimationLibrary_choun")
 }
+
+[node name="poweruptimer" type="Timer" parent="."]
+autostart = true
+
+[node name="damage" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_tipki")
+
+[node name="mall_FINAL" parent="." instance=ExtResource("8_85g3d")]
+transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 0, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="mall_FINAL/Plane" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="mall_FINAL/Plane/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_tipki")
+
+[connection signal="timeout" from="poweruptimer" to="." method="_on_poweruptimer_timeout"]
+
+[editable path="mall_FINAL"]

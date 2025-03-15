@@ -2,6 +2,7 @@ extends Control
 var bselected = 0
 var apps= [0,1,2,3]
 var app = "menu"
+var music = 2
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
@@ -9,9 +10,13 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-
+	$stats/labels/time.text = str("time: ", floor(Global.time*10)/10)
+	$stats/labels/score.text = str("score: ",Global.score)
+	$stats/labels/damaged.text = str("damaged: ",Global.damaged)
+	$stats/labels/powerups.text = str("powerups: ",Global.powerupstaken)
 	# TELEFON UI APKI SELECT LOGIKA JAKBY CO
-	
+	$mainscreen/Panel/ProgressBar.value = Global.health
+	$mainscreen/Panel/ProgressBar.max_value = Global.maxhealth
 	for n in get_children():
 		n.hide()
 	if app == "start":
@@ -20,6 +25,8 @@ func _process(delta: float) -> void:
 		$mainscreen.show()
 	if app == "internet":
 		$internet.show()
+	if app == "stats":
+		$stats.show()
 	for n in $mainscreen/buttons.get_children():
 		n.get_child(0).hide()
 	
@@ -52,9 +59,19 @@ func _process(delta: float) -> void:
 			if bselected == 0:
 				pass
 			if bselected == 1:
-				$Control/AudioStreamPlayer.play()
+				if music == 0:
+					$Control/AudioStreamPlayer.play()
+					music = 1
+					$mainscreen/buttons/Panel2/mdisabled.hide()
+				if music == 2:
+					$Control/AudioStreamPlayer.stop()
+					$mainscreen/buttons/Panel2/mdisabled.show()
+					music=0
+				if music == 1:
+					music = 2
 			if bselected == 2:
-				pass
+				app = "stats"
+				Global.phoneinput[0] = 0
 			if bselected == 3:
 				app = "internet"
 				Global.phoneinput[0] = 0
@@ -62,5 +79,12 @@ func _process(delta: float) -> void:
 	if app == "internet":
 		if Global.phoneinput[0] == 1:
 			app = "menu"
+	if app == "stats":
+		if Global.phoneinput[0] == 1:
+			app = "menu"
 	
 	Global.phoneinput = [0,0,0,0,0]
+
+
+func _on_audio_stream_player_finished() -> void:
+	$Control/AudioStreamPlayer.play()

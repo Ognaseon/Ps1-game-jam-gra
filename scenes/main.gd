@@ -1,8 +1,11 @@
 extends Node3D
 var enemy = load("res://objects/enemy/enemy.tscn")
-var types = ["normal","flying", "creep"]
+var powerup = load("res://objects/powerup/powerup.tscn")
+var types = ["normal","flying", "creep", "dodger"]
 # Called when the node enters the scene tree for the first time.
-
+func spawnpowerup():
+	var inst = powerup.instantiate()
+	$powerup.add_child(inst)
 func genenemies(normalcount, flyingcount, creepcount, dodgecount):
 	for i in range(normalcount):
 		var inst = enemy.instantiate()
@@ -24,11 +27,27 @@ func genenemies(normalcount, flyingcount, creepcount, dodgecount):
 func _ready() -> void:
 	$ui/wave/AnimationPlayer.play("wave")
 	genenemies(10,0,0,0)
+	genenemies(20,10,0,0)
 	
-
+func status_effects_look():
+	if Global.activepowerups["megashot"] == true:
+		var tween_m = create_tween()
+		tween_m.set_parallel(true)
+		tween_m.tween_property($ui/cursor/TextureRect, 'size', Vector2(50, 50), 1)
+		tween_m.tween_property($ui/cursor/TextureRect, 'position', Vector2(-12.5, -12.5), 1)
+	else:
+		var tween_m = create_tween()
+		tween_m.set_parallel(true)
+		tween_m.tween_property($ui/cursor/TextureRect, 'size', Vector2(25, 25), 1)
+		tween_m.tween_property($ui/cursor/TextureRect, 'position', Vector2(0, 0), 1)
+		#$ui/cursor/TextureRect.position = Vector2(-12.5, -12.5)
+		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	status_effects_look()
+	Global.time += delta
+	$ui/lives.max_value = Global.maxhealth
 	$ui/lives.value = Global.health
 	$ui/Label.text = "score: " + str(Global.score)
 	$ui/cursor.position = Global.mousepos - Vector2(12.5,12.5)
@@ -39,11 +58,12 @@ func _process(delta: float) -> void:
 	if Global.health < 1:
 		$ui/deathscreen.show()
 	if Global.hurt == true:
+		$damage.play()
 		Global.hurt = false
 		$ui/hurt/AnimationPlayer.play("hurt")
 	
 	if $enemies.get_child_count() <= 0:
-		Global.health = 10
+		Global.health = Global.maxhealth
 		Global.wave += 1
 		$ui/wave.text = "WAVE " + str(Global.wave)
 		if Global.wave == 10:
@@ -83,3 +103,8 @@ func deleteBullet(bulletid):
 		if n == bulletid:
 			n.scale.x = 50
 			n.queue_free()
+
+
+func _on_poweruptimer_timeout() -> void:
+	$poweruptimer.wait_time = 1# randi_range(10,20)
+	spawnpowerup()

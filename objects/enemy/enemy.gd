@@ -14,8 +14,16 @@ var fallin = true
 var canspawnbullet = true
 var dir = 1
 var dia1 = 0
+var slowness = 0
+var ispeed = 0
+var rng = RandomNumberGenerator.new()
+
+var freeze_tween = create_tween()
+var deathsound = randi_range(0,1)
+var onetime = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	ispeed = speed
 	if type == "normal":
 		posy = 0.9
 	if type == "creep":
@@ -23,19 +31,56 @@ func _ready() -> void:
 	if type == "dodger":
 		posy = randf_range(3,10)
 		speed = randf_range(0.5,1)
+		ispeed = speed
 		dia1 = dia
 	if type == "flying":
-		posy = randf_range(2,8)
+		posy = randf_range(2,4)
 	
 	
-	$Label3D.text = "type: " + type
+	#$Label3D.text = "type: " + type
+
+func _on_slowdown_timer_timeout() -> void:
+	$AnimationPlayer.play('ease_out_snail')
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+	speed = ispeed
+	var freeze = false
+	var slowed = false
+	var scared = false
+	var week = false
 	
-	$Label3D2.text = "state: " + str(state)
+
+	if Global.activepowerups["slowdown"] == true:
+		$StatusEffects/Slowdown.visible = true
+		$StatusEffects/Slowdown_timer.start()
+		slowed = true
+		speed = ispeed /3
+	else:
+		$StatusEffects/Slowdown.visible = false
+	if Global.activepowerups["freeze"] == true:
+		if dead == false:
+			var freeze_tween = create_tween()
+			freeze_tween.tween_property($Sprite3D, 'modulate', Color('86a7ff'), 1)
+		speed = 0
+		freeze = true
+	else:
+		
+		if dead == false:
+			var freeze_tween = create_tween()
+			freeze_tween.tween_property($Sprite3D, 'modulate', Color('ffffff'), 1)
+	if Global.activepowerups["shield"] == true:
+		week = true
+	if Global.activepowerups["scary"] == true:
+		if dead == false:
+			$AnimationPlayer.play("shake")
+		scared = true
+		if dia < 25:
+			dia += delta
+#	$Label3D2.text = "state: " + str(state)
 	if Global.health <1:
 		return
+	
 	if position.y < 1:
 		if dead == true:
 			set_collision_layer_value(1,false)
@@ -45,7 +90,7 @@ func _physics_process(delta: float) -> void:
 			$AnimationPlayer.play("die")
 	if dead == false:
 		position.x = dia * sin(angle )
-		position.z = dia * cos(angle)
+		position.z = dia * cos(angle) 
 		
 		if type == "normal":
 			angle += delta * speed
@@ -60,12 +105,13 @@ func _physics_process(delta: float) -> void:
 			state += delta
 			if state > 5:
 				if canspawnbullet == true:
-					$BulletSpawnTime.wait_time = bullet_spawn_rate * randfn(0.7,1.3)
+					$BulletSpawnTime.wait_time = bullet_spawn_rate * randf_range(0.7,1.3)
 					$BulletSpawnTime.start()
 					canspawnbullet = false
-			position.y = posy + sin(sin/10.0)
+			if Global.activepowerups["freeze"] == false:
+				position.y = posy + sin(sin/10.0)
 		if type == "creep":
-			#angle += delta * speed
+			#angle += delta * speednm 
 			dia -= delta/3
 			$Sprite3D.modulate = Color(0.4,0,0,1)
 			position.y = posy
@@ -84,6 +130,7 @@ func _physics_process(delta: float) -> void:
 			angle += delta * speed * dir
 			dia -= delta/2
 			$Sprite3D.modulate = Color(0,0,1,1)
+	
 
 
 
@@ -93,6 +140,13 @@ func _physics_process(delta: float) -> void:
 		$GPUParticles3D.emitting = true
 		if fallin == true:
 			position.y -= 0.2
+		if onetime == 0:
+			if deathsound == 0:
+				$AudioStreamPlayer.play()
+			else:
+				$AudioStreamPlayer2.play()
+			onetime = 1
+
 	#if dia > 0:
 	#	dia -= delta
 	$MeshInstance3D.position = position
@@ -122,10 +176,24 @@ func _on_body_entered(body: Node3D) -> void:
 			$GPUParticles3D.emitting = true
 			$AnimationPlayer.play("die")
 	if body.is_in_group("player"):
-		Global.health -= 1
+		
+		var candamage = true
+		if Global.activepowerups["invincibility"] == true:
+			candamage = false
+		if candamage == true:
+			Global.damaged += 1
+			Global.health -= 1
 		Global.hurt = true
 		$GPUParticles3D.emitting = true
 		$AnimationPlayer.play("die")
+
+		if Global.activepowerups["shield"] == true:
+			Global.health += 0.5
+			return
+		print("dum")
+		
+		
+		
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	queue_free()
