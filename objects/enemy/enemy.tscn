@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dcqtmafugn0bp"]
+[gd_scene load_steps=25 format=3 uid="uid://dcqtmafugn0bp"]
 
 [ext_resource type="Script" uid="uid://dnb04daoumwie" path="res://objects/enemy/enemy.gd" id="1_1rjq7"]
 [ext_resource type="Texture2D" uid="uid://okkpi245csxx" path="res://assets/snail.png" id="2_ecd4o"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c7plwqjnro1gc" path="res://assets/blood.png" id="4_esv4w"]
 [ext_resource type="AudioStream" uid="uid://d0l1jogmjy0v2" path="res://assets/music/sfx/mis_death.wav" id="5_gnbxk"]
 [ext_resource type="AudioStream" uid="uid://71td486ww2qx" path="res://assets/music/sfx/mis_death_v2.wav" id="6_ecd4o"]
+[ext_resource type="PackedScene" uid="uid://bfjek2aeevjog" path="res://assets/misie/mis.blend" id="8_2ghy8"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_1rjq7"]
 
@@ -25,7 +26,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:modulate")
+tracks/0/path = NodePath("mis:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -37,7 +38,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite3D:position")
+tracks/1/path = NodePath("mis:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -65,7 +66,7 @@ length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:modulate")
+tracks/0/path = NodePath("mis:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -96,7 +97,7 @@ length = 0.7
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:position")
+tracks/0/path = NodePath("mis:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -147,6 +148,43 @@ top_radius = 0.7
 height = 0.001
 radial_segments = 8
 
+[sub_resource type="Animation" id="Animation_2ghy8"]
+resource_name = "ded"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("mis2:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1.39626, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_5umcj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("mis2:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_itxuh"]
+_data = {
+&"RESET": SubResource("Animation_5umcj"),
+&"ded": SubResource("Animation_2ghy8")
+}
+
 [node name="Enemy" type="Area3D" groups=["enemy"]]
 script = ExtResource("1_1rjq7")
 
@@ -163,7 +201,8 @@ mesh = SubResource("QuadMesh_5umcj")
 [node name="Slowdown_timer" type="Timer" parent="StatusEffects"]
 one_shot = true
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="mis" type="Sprite3D" parent="."]
+visible = false
 billboard = 2
 render_priority = 1
 texture = ExtResource("2_vc3w8")
@@ -208,7 +247,20 @@ stream = ExtResource("5_gnbxk")
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_ecd4o")
 
+[node name="mis2" type="Node3D" parent="."]
+
+[node name="mis2" type="Node3D" parent="mis2"]
+
+[node name="mis" parent="mis2/mis2" instance=ExtResource("8_2ghy8")]
+transform = Transform3D(-3.0598e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.0598e-08, 0, 0, 0)
+
+[node name="DED" type="AnimationPlayer" parent="mis2"]
+libraries = {
+&"": SubResource("AnimationLibrary_itxuh")
+}
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="StatusEffects/Slowdown_timer" to="." method="_on_slowdown_timer_timeout"]
 [connection signal="timeout" from="BulletSpawnTime" to="." method="_on_bullet_spawn_time_timeout"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="mis2/DED" to="." method="_on_ded_animation_finished"]

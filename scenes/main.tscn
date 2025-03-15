@@ -1,11 +1,10 @@
-[gd_scene load_steps=31 format=3 uid="uid://drycuryk4elpk"]
+[gd_scene load_steps=29 format=3 uid="uid://drycuryk4elpk"]
 
 [ext_resource type="Script" uid="uid://csaqja2dma85s" path="res://scenes/main.gd" id="1_tefeu"]
 [ext_resource type="PackedScene" uid="uid://b0bn1arlly08a" path="res://objects/player/player.tscn" id="4_jyhfs"]
 [ext_resource type="Shader" path="res://presets/shine_armor.gdshader" id="5_choun"]
 [ext_resource type="Texture2D" uid="uid://bwg3jxq7keg6e" path="res://assets/images-6.jpeg" id="5_tbgi4"]
 [ext_resource type="Texture2D" uid="uid://b6io6t3oq8anm" path="res://assets/stupid cursor.png" id="5_tefeu"]
-[ext_resource type="Script" path="res://debug.gd" id="5_tipki"]
 [ext_resource type="FontFile" uid="uid://cpxje11p44lce" path="res://assets/monogram.ttf" id="7_choun"]
 [ext_resource type="Texture2D" uid="uid://70x36536utnb" path="res://assets/blood-png-1.png" id="7_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://bvh7uaxj816qn" path="res://assets/mall_FINAL.glb" id="8_85g3d"]
@@ -38,9 +37,6 @@ shader_parameter/resolution = 0.87
 shader_parameter/sin_roll = 0.25
 shader_parameter/cos_roll = 0.25
 shader_parameter/alpha = 0.0
-
-[sub_resource type="LabelSettings" id="LabelSettings_tipki"]
-font_size = 12
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jyhfs"]
 bg_color = Color(0, 0, 0, 1)
@@ -264,17 +260,6 @@ offset_bottom = 44.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 15
 text = "score: elo melo"
-
-[node name="Debug" type="Label" parent="ui"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -305.0
-offset_bottom = 273.0
-grow_horizontal = 0
-label_settings = SubResource("LabelSettings_tipki")
-autowrap_mode = 2
-script = ExtResource("5_tipki")
 
 [node name="lives" type="ProgressBar" parent="ui"]
 visible = false

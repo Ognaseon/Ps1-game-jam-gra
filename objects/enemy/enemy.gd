@@ -44,6 +44,7 @@ func _on_slowdown_timer_timeout() -> void:
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+	$mis2.look_at(Vector3(0,0,0))
 	speed = ispeed
 	var freeze = false
 	var slowed = false
@@ -83,11 +84,13 @@ func _physics_process(delta: float) -> void:
 	
 	if position.y < 1:
 		if dead == true:
+			if fallin == true:
+				$mis2/DED.play("ded")
 			set_collision_layer_value(1,false)
 			$blood.show()
 			fallin = false
 			$GPUParticles3D.emitting = true
-			$AnimationPlayer.play("die")
+			
 	if dead == false:
 		position.x = dia * sin(angle )
 		position.z = dia * cos(angle) 
@@ -169,7 +172,7 @@ func _on_body_entered(body: Node3D) -> void:
 			$blood.show()
 			fallin = false
 			$GPUParticles3D.emitting = true
-			$AnimationPlayer.play("die")
+			$mis2/DED.play("ded")
 	if body.is_in_group("player"):
 		
 		var candamage = true
@@ -180,7 +183,7 @@ func _on_body_entered(body: Node3D) -> void:
 			Global.health -= 1
 		Global.hurt = true
 		$GPUParticles3D.emitting = true
-		$AnimationPlayer.play("die")
+		#$mis2/AnimationPlayer.play("ded")
 
 		if Global.activepowerups["shield"] == true:
 			Global.health += 0.5
@@ -193,3 +196,7 @@ func _on_body_entered(body: Node3D) -> void:
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "die":
 		queue_free()
+
+
+func _on_ded_animation_finished(anim_name: StringName) -> void:
+	queue_free()

@@ -29,7 +29,7 @@ func genenemies(normalcount, flyingcount, creepcount, dodgecount):
 func _ready() -> void:
 	$ui/wave/AnimationPlayer.play("wave")
 	genenemies(10,0,0,0)
-	genenemies(20,10,0,0)
+	#genenemies(20,10,0,0)
 	
 func status_effects_look():
 	if Global.activepowerups["megashot"] == true:
@@ -86,13 +86,13 @@ func _process(delta: float) -> void:
 			6:
 				genenemies(40,15,25,0)
 			7:
-				genenemies(20,0,10,10)
+				genenemies(20,0,15,5)
 			8:
-				genenemies(20,0,10,20)
+				genenemies(20,10,10,10)
 			9:
-				genenemies(20,0,10,30)
+				genenemies(20,20,10,20)
 			10:
-				genenemies(20,0,10,40)
+				genenemies(30,30,30,30)
 
 func deleteEnemy(enemyid):
 	if enemyid.dead == false:
