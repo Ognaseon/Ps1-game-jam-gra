@@ -222,8 +222,8 @@ light_energy = 2.467
 
 [connection signal="pressed" from="CanvasLayer/MainMenu/VBoxContainer/StartGame" to="CanvasLayer/MainMenu" method="_on_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/VBoxContainer/StartGame" to="CanvasLayer/MainMenu" method="_on_start_game_pressed"]
-[connection signal="pressed" from="CanvasLayer/MainMenu/VBoxContainer/Options" to="CanvasLayer/MainMenu" method="_on_button_3_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/VBoxContainer/Options" to="CanvasLayer/MainMenu" method="_on_options_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/VBoxContainer/Options" to="CanvasLayer/MainMenu" method="_on_button_3_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/VBoxContainer/Exit" to="CanvasLayer/MainMenu" method="_on_exit_pressed"]
 
 [editable path="CanvasLayer/Settings"]
