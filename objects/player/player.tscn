@@ -68,7 +68,7 @@ skeleton = NodePath("../..")
 [node name="CSGBox3D" type="CSGBox3D" parent="SubViewport/Camera2"]
 
 [node name="Camera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.18285, -0.0705673)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0058198, 1.18285, -0.0731766)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Camera"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.118113, -1.60939)

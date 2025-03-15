@@ -201,6 +201,12 @@ stream = ExtResource("2_ovrgc")
 autoplay = true
 parameters/looping = true
 
+[connection signal="pressed" from="VBoxContainer/StartGame" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="VBoxContainer/StartGame" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+
 [node name="Settings" parent="CanvasLayer" instance=ExtResource("4_6bivr")]
 visible = false
 

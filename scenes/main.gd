@@ -29,10 +29,23 @@ func _ready() -> void:
 	genenemies(10,0,0,0)
 	genenemies(20,10,0,0)
 	
-
+func status_effects_look():
+	if Global.activepowerups["megashot"] == true:
+		var tween_m = create_tween()
+		tween_m.set_parallel(true)
+		tween_m.tween_property($ui/cursor/TextureRect, 'size', Vector2(50, 50), 1)
+		tween_m.tween_property($ui/cursor/TextureRect, 'position', Vector2(-12.5, -12.5), 1)
+	else:
+		var tween_m = create_tween()
+		tween_m.set_parallel(true)
+		tween_m.tween_property($ui/cursor/TextureRect, 'size', Vector2(25, 25), 1)
+		tween_m.tween_property($ui/cursor/TextureRect, 'position', Vector2(0, 0), 1)
+		#$ui/cursor/TextureRect.position = Vector2(-12.5, -12.5)
+		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	status_effects_look()
 	Global.time += delta
 	$ui/lives.max_value = Global.maxhealth
 	$ui/lives.value = Global.health

@@ -16,6 +16,7 @@ var dir = 1
 var dia1 = 0
 var slowness = 0
 var ispeed = 0
+var rng = RandomNumberGenerator.new()
 
 var freeze_tween = create_tween()
 var deathsound = randi_range(0,1)
@@ -37,6 +38,9 @@ func _ready() -> void:
 	
 	
 	#$Label3D.text = "type: " + type
+
+func _on_slowdown_timer_timeout() -> void:
+	$AnimationPlayer.play('ease_out_snail')
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
@@ -46,10 +50,14 @@ func _physics_process(delta: float) -> void:
 	var scared = false
 	var week = false
 	
-	
+
 	if Global.activepowerups["slowdown"] == true:
+		$StatusEffects/Slowdown.visible = true
+		$StatusEffects/Slowdown_timer.start()
 		slowed = true
 		speed = ispeed /3
+	else:
+		$StatusEffects/Slowdown.visible = false
 	if Global.activepowerups["freeze"] == true:
 		if dead == false:
 			var freeze_tween = create_tween()
@@ -64,6 +72,8 @@ func _physics_process(delta: float) -> void:
 	if Global.activepowerups["shield"] == true:
 		week = true
 	if Global.activepowerups["scary"] == true:
+		if dead == false:
+			$AnimationPlayer.play("shake")
 		scared = true
 		if dia < 25:
 			dia += delta

@@ -22,6 +22,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	
 	for i in activepowerups.keys():
 		print(i)
 		activepowerups[i] = false
@@ -33,6 +34,7 @@ func _process(delta: float) -> void:
 		if powerups[i][1] < 0:
 			if powerups[i][0] == "hpup":
 				maxhealth +=1
+
 			if powerups[i][0] == "life":
 				health +=1
 			powerups.remove_at(i)
