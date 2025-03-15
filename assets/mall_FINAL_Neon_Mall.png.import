@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dj8mtm2dyk0la"
-path.s3tc="res://.godot/imported/mall_imageedit_12_5291074518_21.jpg-2ab28979d7b89a5a3a5bdfe4d7e20bb0.s3tc.ctex"
+uid="uid://dq7teslaj6qq7"
+path.s3tc="res://.godot/imported/mall_FINAL_Neon_Mall.png-c0bf58d645b4a8f947c7806f39a44f2e.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "38205bd18561345804c16fc147da4da0"
+"md5": "be47f73dd2808b1ee3dc0a70c9234989"
 }
 
 [deps]
 
-source_file="res://assets/mall/mall_imageedit_12_5291074518_21.jpg"
-dest_files=["res://.godot/imported/mall_imageedit_12_5291074518_21.jpg-2ab28979d7b89a5a3a5bdfe4d7e20bb0.s3tc.ctex"]
+source_file="res://assets/mall_FINAL_Neon_Mall.png"
+dest_files=["res://.godot/imported/mall_FINAL_Neon_Mall.png-c0bf58d645b4a8f947c7806f39a44f2e.s3tc.ctex"]
 
 [params]
 

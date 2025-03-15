@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hror88og8jqq"
-path.s3tc="res://.godot/imported/mall_FLOORTEKSTURAJEBAC.png-d2bfd3ae3f654d73580b8098a89931bb.s3tc.ctex"
+uid="uid://cgeu6rgigemtd"
+path.s3tc="res://.godot/imported/mall_FINAL_Illustration47.png-5cc20452f0b4e155501682d33dca4b31.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "1f916439d7c7c6c28219f3adffe19587"
+"md5": "4de52cada860fdb82f9236faa52fe0d2"
 }
 
 [deps]
 
-source_file="res://assets/mall/mall_FLOORTEKSTURAJEBAC.png"
-dest_files=["res://.godot/imported/mall_FLOORTEKSTURAJEBAC.png-d2bfd3ae3f654d73580b8098a89931bb.s3tc.ctex"]
+source_file="res://assets/mall_FINAL_Illustration47.png"
+dest_files=["res://.godot/imported/mall_FINAL_Illustration47.png-5cc20452f0b4e155501682d33dca4b31.s3tc.ctex"]
 
 [params]
 

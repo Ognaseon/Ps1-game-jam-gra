@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ribs74cl0wgq"
-path.s3tc="res://.godot/imported/mall_Illustration46_14.png-1c61eb2bd79255f2916ca1ee1f012a7e.s3tc.ctex"
+uid="uid://cs8lkun1bqja5"
+path.s3tc="res://.godot/imported/mall_FINAL_Illustration46.png-6622713909acb1ae21168ced207c8ed5.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://assets/mall/mall_Illustration46_14.png"
-dest_files=["res://.godot/imported/mall_Illustration46_14.png-1c61eb2bd79255f2916ca1ee1f012a7e.s3tc.ctex"]
+source_file="res://assets/mall_FINAL_Illustration46.png"
+dest_files=["res://.godot/imported/mall_FINAL_Illustration46.png-6622713909acb1ae21168ced207c8ed5.s3tc.ctex"]
 
 [params]
 

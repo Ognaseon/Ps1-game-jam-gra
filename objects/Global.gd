@@ -1,5 +1,7 @@
 extends Node
-
+var damaged = 0
+var powerupstaken = 0
+var time = 0
 var mousepos = Vector2(0,0)
 var score = 0
 var health = 10
