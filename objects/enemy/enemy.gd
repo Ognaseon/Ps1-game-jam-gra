@@ -75,8 +75,8 @@ func _physics_process(delta: float) -> void:
 		if dead == false:
 			$AnimationPlayer.play("shake")
 		scared = true
-		if dia < 25:
-			dia += delta
+	if dia < 25:
+		dia += delta
 #	$Label3D2.text = "state: " + str(state)
 	if Global.health <1:
 		return
@@ -196,4 +196,5 @@ func _on_body_entered(body: Node3D) -> void:
 		
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	queue_free()
+	if anim_name == "die":
+		queue_free()
